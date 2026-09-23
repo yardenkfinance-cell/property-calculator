@@ -1,1043 +1,2812 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>מחשבון שווי נכס | ירדן קובי</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Heebo:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --bd:#1e3a8a;--b:#2563eb;--bl:#60a5fa;
-      --am:#f59e0b;--aml:#fbbf24;
-      --g50:#f8fafc;--g100:#f1f5f9;--g200:#e2e8f0;
-      --g400:#94a3b8;--g600:#475569;--g800:#1e293b;
-      --sh:0 12px 40px rgba(0,0,0,.13);
-      --r:14px;--rs:8px
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחשבון שווי נכס | ירדן קובי</title>
+    <meta name="description" content="מחשבון שווי נכס חינם מבית ירדן קובי - קבלו הערכת שווי מיידית לדירה, בית או נכס אחר לפי שכונה, גודל, מצב ותוספות. ליווי מקצועי לרכישת נכס ומשכנתא - ייעוץ חינם.">
+    <link rel="canonical" href="https://yardenkfinance-cell.github.io/property-calculator/">
+    <meta property="og:title" content="מחשבון שווי נכס | ירדן קובי">
+    <meta property="og:description" content="הערכת שווי חכמה לנכס שלך תוך שניות - שכונה, גיל בניין, מצב, גודל, תוספות וקרבה למוקדים.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yardenkfinance-cell.github.io/property-calculator/">
+    <meta property="og:locale" content="he_IL">
+    <meta name="robots" content="index, follow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Heebo:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0
     }
-    body{font-family:'Assistant','Heebo',sans-serif;background:linear-gradient(135deg,#e8f0fe,#f0f9ff,#fefce8);min-height:100vh;padding:24px 16px 48px;color:var(--g800)}
-    .w{max-width:760px;margin:0 auto}
-    .hd{text-align:center;margin-bottom:24px}
-    .badge{display:inline-flex;align-items:center;gap:6px;background:var(--bd);color:#fff;font-size:12px;font-weight:700;padding:4px 13px;border-radius:20px;margin-bottom:10px}
-    .hd h1{font-family:'Heebo',sans-serif;font-weight:900;font-size:clamp(22px,5vw,34px);background:linear-gradient(135deg,var(--bd),var(--b),var(--bl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.15;margin-bottom:7px}
-    .hd p{color:var(--g600);font-size:13px;max-width:490px;margin:0 auto;line-height:1.6}
-    .card{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:20px 17px;margin-bottom:12px;border:1.5px solid var(--g200)}
-    .st{font-family:'Heebo',sans-serif;font-weight:800;font-size:15px;color:var(--bd);margin-bottom:13px;display:flex;align-items:center;gap:7px}
-    .sn{background:var(--bd);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0}
-    .g2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-    @media(max-width:500px){.g2{grid-template-columns:1fr}}
-    label{display:block;font-size:12px;font-weight:700;color:var(--g600);margin-bottom:3px}
-    label .r{color:#e11d48}
-    input[type=text],input[type=number],input[type=tel],select,textarea{
-      width:100%;padding:9px 11px;border:2px solid var(--g200);border-radius:var(--rs);
-      font-family:'Assistant',sans-serif;font-size:13.5px;color:var(--g800);
-      background:var(--g50);transition:border-color .2s,box-shadow .2s;outline:none;
-      -webkit-appearance:none;appearance:none
+
+    :root {
+        --bd: #1e3a8a;
+        --b: #2563eb;
+        --bl: #60a5fa;
+        --am: #f59e0b;
+        --aml: #fbbf24;
+        --g50: #f8fafc;
+        --g100: #f1f5f9;
+        --g200: #e2e8f0;
+        --g400: #94a3b8;
+        --g600: #475569;
+        --g800: #1e293b;
+        --sh: 0 12px 40px rgba(0, 0, 0, .13);
+        --r: 14px;
+        --rs: 8px
     }
-    select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 9px center;padding-left:28px}
-    input:focus,select:focus,textarea:focus{border-color:var(--b);box-shadow:0 0 0 3px rgba(37,99,235,.11);background:#fff}
-    textarea{resize:vertical;min-height:58px}
-    .hint{font-size:10.5px;color:var(--g400);margin-top:3px}
-    .pg{display:flex;flex-wrap:wrap;gap:6px}
-    .pl{cursor:pointer}
-    .pl input{display:none}
-    .pl span{display:inline-block;padding:5px 11px;border:2px solid var(--g200);border-radius:30px;font-size:12px;font-weight:600;color:var(--g600);background:var(--g50);transition:all .18s;user-select:none}
-    .pl input:checked+span{border-color:var(--b);background:rgba(37,99,235,.08);color:var(--bd)}
-    .pl:hover span{border-color:var(--bl)}
-    .cb{background:linear-gradient(135deg,#eef2ff,#e0f2fe);border:2px solid #bfdbfe;border-radius:var(--r);padding:15px;margin-bottom:12px}
-    .bs{width:100%;background:linear-gradient(135deg,var(--am),var(--aml));color:#1a1200;border:none;border-radius:40px;padding:14px;font-family:'Heebo',sans-serif;font-weight:900;font-size:17px;cursor:pointer;box-shadow:0 4px 20px rgba(245,158,11,.35);transition:transform .2s,box-shadow .2s}
-    .bs:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,158,11,.45)}
-    .sc{display:none}.sc.a{display:block}
-    .ls{text-align:center;padding:54px 20px}
-    .sp{width:40px;height:40px;border:4px solid var(--g200);border-top-color:var(--b);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 13px}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .lst{font-size:12.5px;color:var(--g400);padding:3px 0;transition:color .3s}
-    .lst.ac{color:var(--b);font-weight:700}
-    .lst.dn{color:#059669}
-    .rs{animation:fu .4s ease}
-    @keyframes fu{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
-    .rc{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);border:2px solid #86efac;border-radius:var(--r);padding:20px 17px;margin-bottom:11px}
-    .rt{font-family:'Heebo',sans-serif;font-weight:900;font-size:18px;color:#065f46;text-align:center;margin-bottom:3px}
-    .rsb{text-align:center;color:#047857;font-size:12.5px;margin-bottom:13px}
-    .rr{text-align:center;font-family:'Heebo',sans-serif;font-weight:900;font-size:clamp(19px,5vw,30px);color:var(--bd);background:#fff;border-radius:var(--rs);padding:12px;margin-bottom:9px;border:2px solid #86efac}
-    .rpm{text-align:center;font-size:12.5px;color:var(--g600);margin-bottom:13px}
-    .rf{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:6px;margin-bottom:13px}
-    .fc{background:#fff;border:1.5px solid var(--g200);border-radius:var(--rs);padding:7px 9px;font-size:11px;color:var(--g600)}
-    .fc strong{display:block;color:var(--g800);font-size:12px;margin-bottom:1px}
-    .fc.pos{border-color:#86efac;background:#f0fdf4}
-    .fc.neg{border-color:#fca5a5;background:#fff5f5}
-    .fc.neu{border-color:#fde68a;background:#fffbeb}
-    .rn{background:#fff;border-radius:var(--rs);padding:11px;font-size:12.5px;color:var(--g600);line-height:1.6;border:1.5px solid #bfdbfe;margin-bottom:13px}
-    .rcta{background:linear-gradient(135deg,var(--bd),var(--b));color:#fff;border-radius:var(--r);padding:15px;text-align:center;margin-bottom:11px}
-    .rcta h3{font-family:'Heebo',sans-serif;font-weight:900;font-size:15px;margin-bottom:5px}
-    .rcta p{font-size:12px;opacity:.9;margin-bottom:11px}
-    .ctab{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-    .btp{display:inline-flex;align-items:center;gap:5px;background:var(--am);color:#1a1200;padding:9px 16px;border-radius:30px;font-weight:900;font-size:13.5px;text-decoration:none;transition:transform .2s}
-    .btw{display:inline-flex;align-items:center;gap:5px;background:#25d366;color:#fff;padding:9px 16px;border-radius:30px;font-weight:900;font-size:13.5px;text-decoration:none;transition:transform .2s}
-    .btp:hover,.btw:hover{transform:scale(1.04)}
-    .disc{text-align:center;font-size:11px;color:var(--g400)}
-    .brt{width:100%;background:var(--g100);color:var(--g600);border:2px solid var(--g200);border-radius:40px;padding:10px;font-family:'Heebo',sans-serif;font-weight:700;font-size:13.5px;cursor:pointer;margin-top:8px;transition:background .2s}
-    .brt:hover{background:var(--g200)}
-    .sb{margin-top:9px;padding:10px;background:#eff6ff;border:2px dashed #93c5fd;border-radius:var(--rs)}
-    .sby{margin-top:9px;padding:10px;background:#fefce8;border:2px dashed #fde68a;border-radius:var(--rs)}
-    .sep{height:1.5px;background:var(--g200);margin:11px 0}
-    .mb{margin-bottom:11px}
-    .err{color:#e11d48;font-size:11.5px;font-weight:700;margin-top:3px;display:none}
-    .err.s{display:block}
-  </style>
+
+    body {
+        font-family: 'Assistant', 'Heebo', sans-serif;
+        background: linear-gradient(135deg, #e8f0fe, #f0f9ff, #fefce8);
+        min-height: 100vh;
+        padding: 24px 16px 48px;
+        color: var(--g800)
+    }
+
+    .w {
+        max-width: 760px;
+        margin: 0 auto
+    }
+
+    .hd {
+        text-align: center;
+        margin-bottom: 24px
+    }
+
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--bd);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 13px;
+        border-radius: 20px;
+        margin-bottom: 10px
+    }
+
+    .hd h1 {
+        font-family: 'Heebo', sans-serif;
+        font-weight: 900;
+        font-size: clamp(22px, 5vw, 34px);
+        background: linear-gradient(135deg, var(--bd), var(--b), var(--bl));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1.15;
+        margin-bottom: 7px
+    }
+
+    .hd p {
+        color: var(--g600);
+        font-size: 13px;
+        max-width: 490px;
+        margin: 0 auto;
+        line-height: 1.6
+    }
+
+    .card {
+        background: #fff;
+        border-radius: var(--r);
+        box-shadow: var(--sh);
+        padding: 20px 17px;
+        margin-bottom: 12px;
+        border: 1.5px solid var(--g200)
+    }
+
+    .st {
+        font-family: 'Heebo', sans-serif;
+        font-weight: 800;
+        font-size: 15px;
+        color: var(--bd);
+        margin-bottom: 13px;
+        display: flex;
+        align-items: center;
+        gap: 7px
+    }
+
+    .sn {
+        background: var(--bd);
+        color: #fff;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 900;
+        flex-shrink: 0
+    }
+
+    .g2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 11px
+    }
+
+    @media (max-width: 500px) {
+        .g2 {
+            grid-template-columns: 1fr
+        }
+    }
+
+    label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--g600);
+        margin-bottom: 3px
+    }
+
+    label .r {
+        color: #e11d48
+    }
+
+    input[type=text], input[type=number], input[type=tel], select, textarea {
+        width: 100%;
+        padding: 9px 11px;
+        border: 2px solid var(--g200);
+        border-radius: var(--rs);
+        font-family: 'Assistant', sans-serif;
+        font-size: 13.5px;
+        color: var(--g800);
+        background: var(--g50);
+        transition: border-color .2s, box-shadow .2s;
+        outline: none;
+        -webkit-appearance: none;
+        appearance: none
+    }
+
+    select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: left 9px center;
+        padding-left: 28px
+    }
+
+    input:focus, select:focus, textarea:focus {
+        border-color: var(--b);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, .11);
+        background: #fff
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 58px
+    }
+
+    .hint {
+        font-size: 10.5px;
+        color: var(--g400);
+        margin-top: 3px
+    }
+
+    .pg {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px
+    }
+
+    .pl {
+        cursor: pointer
+    }
+
+    .pl input {
+        display: none
+    }
+
+    .pl span {
+        display: inline-block;
+        padding: 5px 11px;
+        border: 2px solid var(--g200);
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--g600);
+        background: var(--g50);
+        transition: all .18s;
+        user-select: none
+    }
+
+    .pl input:checked + span {
+        border-color: var(--b);
+        background: rgba(37, 99, 235, .08);
+        color: var(--bd)
+    }
+
+    .pl:hover span {
+        border-color: var(--bl)
+    }
+
+    .cb {
+        background: linear-gradient(135deg, #eef2ff, #e0f2fe);
+        border: 2px solid #bfdbfe;
+        border-radius: var(--r);
+        padding: 15px;
+        margin-bottom: 12px
+    }
+
+    .bs {
+        width: 100%;
+        background: linear-gradient(135deg, var(--am), var(--aml));
+        color: #1a1200;
+        border: none;
+        border-radius: 40px;
+        padding: 14px;
+        font-family: 'Heebo', sans-serif;
+        font-weight: 900;
+        font-size: 17px;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(245, 158, 11, .35);
+        transition: transform .2s, box-shadow .2s
+    }
+
+    .bs:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(245, 158, 11, .45)
+    }
+
+    .sc {
+        display:none
+    }
+
+    .sc.a {
+        display: block
+    }
+
+    .ls {
+        text-align: center;
+        padding: 54px 20px
+    }
+
+    .sp {
+        width: 40px;
+        height: 40px;
+        border: 4px solid var(--g200);
+        border-top-color: var(--b);
+        border-radius: 50%;
+        animation: spin .8s linear infinite;
+        margin: 0 auto 13px
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg)
+        }
+    }
+
+    .lst {
+        font-size: 12.5px;
+        color: var(--g400);
+        padding: 3px 0;
+        transition: color .3s
+    }
+
+    .lst.ac {
+        color: var(--b);
+        font-weight: 700
+    }
+
+    .lst.dn {
+        color: #059669
+    }
+
+    .rs {
+        animation: fu .4s ease
+    }
+
+    @keyframes fu {
+        from {
+            opacity: 0;
+            transform:translateY(13px)
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }
+
+    .rc {
+        background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+        border: 2px solid #86efac;
+        border-radius: var(--r);
+        padding: 20px 17px;
+        margin-bottom: 11px
+    }
+
+    .rt {
+        font-family: 'Heebo', sans-serif;
+        font-weight: 900;
+        font-size: 18px;
+        color: #065f46;
+        text-align: center;
+        margin-bottom: 3px
+    }
+
+    .rsb {
+        text-align: center;
+        color: #047857;
+        font-size: 12.5px;
+        margin-bottom: 13px
+    }
+
+    .rr {
+        text-align: center;
+        font-family: 'Heebo', sans-serif;
+        font-weight: 900;
+        font-size: clamp(19px, 5vw, 30px);
+        color: var(--bd);
+        background: #fff;
+        border-radius: var(--rs);
+        padding: 12px;
+        margin-bottom: 9px;
+        border: 2px solid #86efac
+    }
+
+    .rpm {
+        text-align: center;
+        font-size: 12.5px;
+        color: var(--g600);
+        margin-bottom: 13px
+    }
+
+    .rf {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+        gap: 6px;
+        margin-bottom: 13px
+    }
+
+    .fc {
+        background: #fff;
+        border: 1.5px solid var(--g200);
+        border-radius: var(--rs);
+        padding: 7px 9px;
+        font-size: 11px;
+        color: var(--g600)
+    }
+
+    .fc strong {
+        display: block;
+        color: var(--g800);
+        font-size: 12px;
+        margin-bottom: 1px
+    }
+
+    .fc.pos {
+        border-color: #86efac;
+        background: #f0fdf4
+    }
+
+    .fc.neg {
+        border-color: #fca5a5;
+        background: #fff5f5
+    }
+
+    .fc.neu {
+        border-color: #fde68a;
+        background: #fffbeb
+    }
+
+    .rn {
+        background: #fff;
+        border-radius: var(--rs);
+        padding: 11px;
+        font-size: 12.5px;
+        color: var(--g600);
+        line-height: 1.6;
+        border: 1.5px solid #bfdbfe;
+        margin-bottom: 13px
+    }
+
+    .rcta {
+        background: linear-gradient(135deg, var(--bd), var(--b));
+        color: #fff;
+        border-radius: var(--r);
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 11px
+    }
+
+    .rcta h3 {
+        font-family: 'Heebo', sans-serif;
+        font-weight: 900;
+        font-size: 15px;
+        margin-bottom: 5px
+    }
+
+    .rcta p {
+        font-size: 12px;
+        opacity: .9;
+        margin-bottom: 11px
+    }
+
+    .ctab {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap
+    }
+
+    .btp {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: var(--am);
+        color: #1a1200;
+        padding: 9px 16px;
+        border-radius: 30px;
+        font-weight: 900;
+        font-size: 13.5px;
+        text-decoration: none;
+        transition: transform .2s
+    }
+
+    .btw {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: #25d366;
+        color: #fff;
+        padding: 9px 16px;
+        border-radius: 30px;
+        font-weight: 900;
+        font-size: 13.5px;
+        text-decoration: none;
+        transition: transform .2s
+    }
+
+    .btp:hover, .btw:hover {
+        transform: scale(1.04)
+    }
+
+    .disc {
+        text-align: center;
+        font-size: 11px;
+        color: var(--g400)
+    }
+
+    .brt {
+        width: 100%;
+        background: var(--g100);
+        color: var(--g600);
+        border: 2px solid var(--g200);
+        border-radius: 40px;
+        padding: 10px;
+        font-family: 'Heebo', sans-serif;
+        font-weight: 700;
+        font-size: 13.5px;
+        cursor: pointer;
+        margin-top: 8px;
+        transition: background .2s
+    }
+
+    .brt:hover {
+        background: var(--g200)
+    }
+
+    .sb {
+        margin-top: 9px;
+        padding: 10px;
+        background: #eff6ff;
+        border: 2px dashed #93c5fd;
+        border-radius: var(--rs)
+    }
+
+    .sby {
+        margin-top: 9px;
+        padding: 10px;
+        background: #fefce8;
+        border: 2px dashed #fde68a;
+        border-radius: var(--rs)
+    }
+
+    .sep {
+        height: 1.5px;
+        background: var(--g200);
+        margin: 11px 0
+    }
+
+    .mb {
+        margin-bottom: 11px
+    }
+
+    .err {
+        color: #e11d48;
+        font-size: 11.5px;
+        font-weight: 700;
+        margin-top: 3px;
+        display: none
+    }
+
+    .err.s {
+        display: block
+    }
+    </style>
 </head>
 <body>
-<div class="w">
-  <div class="hd">
-    <div class="badge">🔍 ירדן קובי — יועץ משכנתאות מוסמך</div>
-    <h1>מחשבון שווי נכס</h1>
-    <p>הערכת שווי חכמה לנכס שלך — מנתחת שכונה, גיל הבניין, מצב, גודל, רמת גימור, תוספות וקרבה למוקדים, ומתרגמת הכל למחיר שוק ריאלי תוך שניות</p>
-  </div>
+    <div class="w">
+        <div class="hd">
+            <div class="badge">🔍 ירדן קובי — יועץ משכנתאות מוסמך</div>
+            <h1>מחשבון שווי נכס</h1>
+            <p>הערכת שווי חכמה לנכס שלך — מנתחת שכונה, גיל הבניין, מצב, גודל, רמת גימור, תוספות וקרבה למוקדים, ומתרגמת הכל למחיר שוק ריאלי תוך שניות</p>
+        </div>
 
-  <!-- FORM -->
-  <div id="sf" class="sc a">
-    <form id="vf" novalidate>
+        <!-- FORM -->
+        <div id="sf" class="sc a">
+            <form id="vf" novalidate>
 
-      <div class="card">
-        <div class="st"><span class="sn">1</span> סוג הנכס ומיקום</div>
-        <div class="g2 mb">
-          <div>
-            <label>סוג הנכס <span class="r">*</span></label>
-            <select id="pt">
-              <option value="apartment">דירה</option>
-              <option value="garden">דירת גן</option>
-              <option value="penthouse">פנטהאוז</option>
-              <option value="cottage">בית קרקע / קוטג' / פרטי</option>
-              <option value="nachla">נחלה / מגרש חקלאי</option>
-            </select>
-          </div>
-          <div>
-            <label>עיר <span class="r">*</span></label>
-            <select id="cs">
-              <option value="">-- בחר עיר --</option>
-              <option value="tel_aviv">תל אביב-יפו</option>
-              <option value="jerusalem">ירושלים</option>
-              <option value="haifa">חיפה</option>
-              <option value="rishon">ראשון לציון</option>
-              <option value="petah_tikva">פתח תקווה</option>
-              <option value="netanya">נתניה</option>
-              <option value="ramat_gan">רמת גן</option>
-              <option value="herzliya">הרצליה</option>
-              <option value="kfar_saba">כפר סבא</option>
-              <option value="holon">חולון</option>
-              <option value="bat_yam">בת ים</option>
-              <option value="rehovot">רחובות</option>
-              <option value="givat_shmuel">גבעת שמואל</option>
-              <option value="givatayim">גבעתיים</option>
-              <option value="bnei_brak">בני ברק</option>
-              <option value="ramat_hasharon">רמת השרון</option>
-              <option value="hod_hasharon">הוד השרון</option>
-              <option value="raanana">רעננה</option>
-              <option value="or_yehuda">אור יהודה</option>
-              <option value="yehud">יהוד-מונוסון</option>
-              <option value="lod">לוד</option>
-              <option value="ramla">רמלה</option>
-              <option value="nes_ziona">נס ציונה</option>
-              <option value="ashdod">אשדוד</option>
-              <option value="ashkelon">אשקלון</option>
-              <option value="beer_sheva">באר שבע</option>
-              <option value="hadera">חדרה</option>
-              <option value="modiin">מודיעין-מכבים-רעות</option>
-              <option value="kiryat_ono">קריית אונו</option>
-              <option value="rosh_haayin">ראש העין</option>
-              <option value="maale_adumim">מעלה אדומים</option>
-              <option value="beit_shemesh">בית שמש</option>
-              <option value="nahariya">נהריה</option>
-              <option value="acre">עכו</option>
-              <option value="carmiel">כרמיאל</option>
-              <option value="tiberias">טבריה</option>
-              <option value="afula">עפולה</option>
-              <option value="eilat">אילת</option>
-              <option value="kiryat_gat">קריית גת</option>
-              <option value="south">דימונה / ערד / נתיבות</option>
-              <optgroup label="── יישובי יוקרה ──">
-              <option value="kfar_shmaryahu">כפר שמריהו</option>
-              <option value="savyon">סביון</option>
-              <option value="arsuf">ארסוף</option>
-              <option value="rishpon">רשפון</option>
-              <option value="udim">אודים</option>
-              <option value="batzra">בצרה</option>
-              <option value="neve_yarak">נווה ירק</option>
-              <option value="kfar_neter">כפר נטר</option>
-              <option value="bnei_zion">בני ציון</option>
-              <option value="tzur_yitzhak">צור יצחק</option>
-              <option value="harutzim">חרוצים</option>
-              <option value="caesarea">קיסריה</option>
-              <option value="binyamina">בנימינה-גבעת עדה</option>
-              <option value="zichron">זכרון יעקב</option>
-              <option value="kochav_yair">כוכב יאיר-צור יגאל</option>
-              <option value="shoham">שוהם</option>
-              <option value="ramat_yishai">רמת ישי</option>
-              <option value="kiryat_tivon">קריית טבעון</option>
-              <option value="omer">עומר</option>
-              <option value="lehavim">להבים</option>
-              <option value="meitar">מיתר</option>
-              </optgroup>
-              <optgroup label="── מרכז / מבוקש ──">
-              <option value="givat_brenner">גן יבנה / יבנה</option>
-              <option value="gedera">גדרה</option>
-              <option value="mazkeret_batya">מזכרת בתיה</option>
-              <option value="gan_yavne">קריית עקרון</option>
-              <option value="ganei_tikva">גני תקווה</option>
-              <option value="elad">אלעד</option>
-              <option value="kadima">קדימה-צורן</option>
-              <option value="pardes_hana">פרדס חנה-כרכור</option>
-              <option value="yokneam">יקנעם עילית</option>
-              <option value="nesher">נשר</option>
-              <option value="kiryat_motzkin">קריית מוצקין</option>
-              <option value="kiryat_bialik">קריית ביאליק</option>
-              <option value="kiryat_yam">קריית ים</option>
-              <option value="kiryat_ata">קריית אתא</option>
-              <option value="migdal_haemek">מגדל העמק</option>
-              </optgroup>
-              <optgroup label="── פריפריה / צפון ──">
-              <option value="nof_hagalil">נוף הגליל (נצרת עילית)</option>
-              <option value="maalot">מעלות-תרשיחא</option>
-              <option value="shlomi">שלומי</option>
-              <option value="kiryat_shmona">קריית שמונה</option>
-              <option value="safed">צפת</option>
-              <option value="safsufa">ספסופה / מירון אזור</option>
-              <option value="rosh_pina">ראש פינה</option>
-              <option value="hatzor">חצור הגלילית</option>
-              <option value="beit_shean">בית שאן</option>
-              <option value="migdal">מגדל / כנרת אזור</option>
-              <option value="yavniel">יבנאל</option>
-              <option value="sderot">שדרות</option>
-              <option value="ofakim">אופקים</option>
-              <option value="netivot_s">נתיבות</option>
-              <option value="mitzpe_ramon">מצפה רמון</option>
-              <option value="yeruham">ירוחם</option>
-              </optgroup>
-              <option value="other_city">ישוב / עיר אחרת</option>
-            </select>
-            <div id="ce" class="err">אנא בחר עיר</div>
-          </div>
-        </div>
-        <div class="mb">
-          <label>שכונה <span class="r">*</span></label>
-          <select id="ns" disabled><option value="">בחר עיר קודם...</option></select>
-          <div id="ne" class="err">אנא בחר שכונה</div>
-          <div id="cnb" class="sb" style="display:none">
-            <label>שם השכונה</label>
-            <input type="text" id="cn" placeholder="הקלד שם שכונה...">
-          </div>
-        </div>
-        <div class="g2">
-          <div>
-            <label>רחוב ומספר (אופציונלי)</label>
-            <input type="text" id="sa" placeholder="למשל: הצוערים 1א">
-          </div>
-          <div>
-            <label>כיוון גיאוגרפי עיקרי</label>
-            <select id="ori">
-              <option value="unknown">לא ידוע</option>
-              <option value="N">צפון</option><option value="NE">צפון-מזרח</option>
-              <option value="NW">צפון-מערב</option><option value="S">דרום</option>
-              <option value="SE">דרום-מזרח</option><option value="SW">דרום-מערב</option>
-              <option value="E">מזרח</option><option value="W">מערב</option>
-            </select>
-          </div>
-        </div>
-        <div id="fab" class="sb" style="display:none;margin-top:9px">
-          <label>כתובת מלאה <span class="r">*</span></label>
-          <input type="text" id="fa" placeholder="ישוב, שכונה, רחוב ומספר...">
-        </div>
-      </div>
+                <div class="card">
+                    <div class="st">
+                        <span class="sn">1</span>
+                         סוג הנכס ומיקום
+                    </div>
+                    <div class="g2 mb">
+                        <div>
+                            <label>
+                                סוג הנכס 
+                                <span class="r">*</span>
+                            </label>
+                            <select id="pt">
+                                <option value="apartment">דירה</option>
+                                <option value="garden">דירת גן</option>
+                                <option value="penthouse">פנטהאוז</option>
+                                <option value="cottage">בית קרקע / קוטג' / פרטי</option>
+                                <option value="nachla">נחלה / מגרש חקלאי</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>
+                                עיר 
+                                <span class="r">*</span>
+                            </label>
+                            <select id="cs">
+                                <option value="">-- בחר עיר --</option>
+                                <option value="tel_aviv">תל אביב-יפו</option>
+                                <option value="jerusalem">ירושלים</option>
+                                <option value="haifa">חיפה</option>
+                                <option value="rishon">ראשון לציון</option>
+                                <option value="petah_tikva">פתח תקווה</option>
+                                <option value="netanya">נתניה</option>
+                                <option value="ramat_gan">רמת גן</option>
+                                <option value="herzliya">הרצליה</option>
+                                <option value="kfar_saba">כפר סבא</option>
+                                <option value="holon">חולון</option>
+                                <option value="bat_yam">בת ים</option>
+                                <option value="rehovot">רחובות</option>
+                                <option value="givat_shmuel">גבעת שמואל</option>
+                                <option value="givatayim">גבעתיים</option>
+                                <option value="bnei_brak">בני ברק</option>
+                                <option value="ramat_hasharon">רמת השרון</option>
+                                <option value="hod_hasharon">הוד השרון</option>
+                                <option value="raanana">רעננה</option>
+                                <option value="or_yehuda">אור יהודה</option>
+                                <option value="yehud">יהוד-מונוסון</option>
+                                <option value="lod">לוד</option>
+                                <option value="ramla">רמלה</option>
+                                <option value="nes_ziona">נס ציונה</option>
+                                <option value="ashdod">אשדוד</option>
+                                <option value="ashkelon">אשקלון</option>
+                                <option value="beer_sheva">באר שבע</option>
+                                <option value="hadera">חדרה</option>
+                                <option value="modiin">מודיעין-מכבים-רעות</option>
+                                <option value="kiryat_ono">קריית אונו</option>
+                                <option value="rosh_haayin">ראש העין</option>
+                                <option value="maale_adumim">מעלה אדומים</option>
+                                <option value="beit_shemesh">בית שמש</option>
+                                <option value="nahariya">נהריה</option>
+                                <option value="acre">עכו</option>
+                                <option value="carmiel">כרמיאל</option>
+                                <option value="tiberias">טבריה</option>
+                                <option value="afula">עפולה</option>
+                                <option value="eilat">אילת</option>
+                                <option value="kiryat_gat">קריית גת</option>
+                                <option value="south">דימונה / ערד / נתיבות</option>
+                                <optgroup label="── יישובי יוקרה ──">
+                                    <option value="kfar_shmaryahu">כפר שמריהו</option>
+                                    <option value="savyon">סביון</option>
+                                    <option value="arsuf">ארסוף</option>
+                                    <option value="rishpon">רשפון</option>
+                                    <option value="udim">אודים</option>
+                                    <option value="batzra">בצרה</option>
+                                    <option value="neve_yarak">נווה ירק</option>
+                                    <option value="kfar_neter">כפר נטר</option>
+                                    <option value="bnei_zion">בני ציון</option>
+                                    <option value="tzur_yitzhak">צור יצחק</option>
+                                    <option value="harutzim">חרוצים</option>
+                                    <option value="caesarea">קיסריה</option>
+                                    <option value="binyamina">בנימינה-גבעת עדה</option>
+                                    <option value="zichron">זכרון יעקב</option>
+                                    <option value="kochav_yair">כוכב יאיר-צור יגאל</option>
+                                    <option value="shoham">שוהם</option>
+                                    <option value="ramat_yishai">רמת ישי</option>
+                                    <option value="kiryat_tivon">קריית טבעון</option>
+                                    <option value="omer">עומר</option>
+                                    <option value="lehavim">להבים</option>
+                                    <option value="meitar">מיתר</option>
+                                </optgroup>
+                                <optgroup label="── מרכז / מבוקש ──">
+                                    <option value="givat_brenner">גן יבנה / יבנה</option>
+                                    <option value="gedera">גדרה</option>
+                                    <option value="mazkeret_batya">מזכרת בתיה</option>
+                                    <option value="gan_yavne">קריית עקרון</option>
+                                    <option value="ganei_tikva">גני תקווה</option>
+                                    <option value="elad">אלעד</option>
+                                    <option value="kadima">קדימה-צורן</option>
+                                    <option value="pardes_hana">פרדס חנה-כרכור</option>
+                                    <option value="yokneam">יקנעם עילית</option>
+                                    <option value="nesher">נשר</option>
+                                    <option value="kiryat_motzkin">קריית מוצקין</option>
+                                    <option value="kiryat_bialik">קריית ביאליק</option>
+                                    <option value="kiryat_yam">קריית ים</option>
+                                    <option value="kiryat_ata">קריית אתא</option>
+                                    <option value="migdal_haemek">מגדל העמק</option>
+                                </optgroup>
+                                <optgroup label="── פריפריה / צפון ──">
+                                    <option value="nof_hagalil">נוף הגליל (נצרת עילית)</option>
+                                    <option value="maalot">מעלות-תרשיחא</option>
+                                    <option value="shlomi">שלומי</option>
+                                    <option value="kiryat_shmona">קריית שמונה</option>
+                                    <option value="safed">צפת</option>
+                                    <option value="safsufa">ספסופה / מירון אזור</option>
+                                    <option value="rosh_pina">ראש פינה</option>
+                                    <option value="hatzor">חצור הגלילית</option>
+                                    <option value="beit_shean">בית שאן</option>
+                                    <option value="migdal">מגדל / כנרת אזור</option>
+                                    <option value="yavniel">יבנאל</option>
+                                    <option value="sderot">שדרות</option>
+                                    <option value="ofakim">אופקים</option>
+                                    <option value="netivot_s">נתיבות</option>
+                                    <option value="mitzpe_ramon">מצפה רמון</option>
+                                    <option value="yeruham">ירוחם</option>
+                                </optgroup>
+                                <option value="other_city">ישוב / עיר אחרת</option>
+                            </select>
+                            <div id="ce" class="err">אנא בחר עיר</div>
+                        </div>
+                    </div>
+                    <div class="mb">
+                        <label>
+                            שכונה 
+                            <span class="r">*</span>
+                        </label>
+                        <select id="ns" disabled>
+                            <option value="">בחר עיר קודם...</option>
+                        </select>
+                        <div id="ne" class="err">אנא בחר שכונה</div>
+                        <div id="cnb" class="sb" style="display:none">
+                            <label>שם השכונה</label>
+                            <input type="text" id="cn" placeholder="הקלד שם שכונה...">
+                        </div>
+                    </div>
+                    <div class="g2">
+                        <div>
+                            <label>רחוב ומספר (אופציונלי)</label>
+                            <input type="text" id="sa" placeholder="למשל: הצוערים 1א">
+                        </div>
+                        <div>
+                            <label>כיוון גיאוגרפי עיקרי</label>
+                            <select id="ori">
+                                <option value="unknown">לא ידוע</option>
+                                <option value="N">צפון</option>
+                                <option value="NE">צפון-מזרח</option>
+                                <option value="NW">צפון-מערב</option>
+                                <option value="S">דרום</option>
+                                <option value="SE">דרום-מזרח</option>
+                                <option value="SW">דרום-מערב</option>
+                                <option value="E">מזרח</option>
+                                <option value="W">מערב</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="fab" class="sb" style="display:none;margin-top:9px">
+                        <label>
+                            כתובת מלאה 
+                            <span class="r">*</span>
+                        </label>
+                        <input type="text" id="fa" placeholder="ישוב, שכונה, רחוב ומספר...">
+                    </div>
+                </div>
 
-      <div class="card">
-        <div class="st"><span class="sn">2</span> פרטי הנכס</div>
-        <div class="g2 mb">
-          <div>
-            <label>גודל (מ"ר) <span class="r">*</span></label>
-            <input type="number" id="sz" min="20" max="2000" placeholder="למשל: 84">
-            <div id="sze" class="err">הזן גודל תקין (20–2000)</div>
-          </div>
-          <div>
-            <label>מספר חדרים</label>
-            <input type="number" id="rm" min="1" max="12" step="0.5" placeholder="למשל: 4">
-          </div>
-        </div>
-        <div class="mb">
-          <label>שנת בניית הבניין <span class="r">*</span></label>
-          <div class="pg">
-            <label class="pl"><input type="radio" name="by" value="new"><span>🏗️ 2010 ואילך</span></label>
-            <label class="pl"><input type="radio" name="by" value="mid"><span>📅 1990–2009</span></label>
-            <label class="pl"><input type="radio" name="by" value="old" checked><span>🏛️ 1970–1989</span></label>
-            <label class="pl"><input type="radio" name="by" value="veryold"><span>🏚️ לפני 1970</span></label>
-          </div>
-          <div class="hint">גיל הבניין מוריד/מעלה את המחיר בסיסי ב-8–15%</div>
-        </div>
-        <div class="g2 mb">
-          <div>
-            <label>קומת הדירה <span class="r">*</span></label>
-            <input type="number" id="fl" min="0" max="80" placeholder="0 = קרקע">
-          </div>
-          <div>
-            <label>סה"כ קומות בבניין</label>
-            <input type="number" id="tf" min="1" max="80" placeholder="למשל: 8">
-            <div class="hint">חשוב לניקוד הקומה</div>
-          </div>
-        </div>
-        <div class="mb">
-          <label>מיקום בבניין</label>
-          <div class="pg">
-            <label class="pl"><input type="radio" name="fc" value="front" checked><span>🏢 חזית</span></label>
-            <label class="pl"><input type="radio" name="fc" value="rear"><span>🌿 עורפית</span></label>
-            <label class="pl"><input type="radio" name="fc" value="corner"><span>📐 פינתית</span></label>
-          </div>
-        </div>
-        <div class="mb">
-          <label>כיווני אוויר</label>
-          <div class="pg">
-            <label class="pl"><input type="radio" name="ad" value="1"><span>1</span></label>
-            <label class="pl"><input type="radio" name="ad" value="2" checked><span>2</span></label>
-            <label class="pl"><input type="radio" name="ad" value="3"><span>3</span></label>
-            <label class="pl"><input type="radio" name="ad" value="4"><span>4</span></label>
-          </div>
-        </div>
-        <div>
-          <label>נוף</label>
-          <div class="pg">
-            <label class="pl"><input type="radio" name="vw" value="urban" checked><span>🏙️ עירוני</span></label>
-            <label class="pl"><input type="radio" name="vw" value="open"><span>🌳 פתוח / פארק</span></label>
-            <label class="pl"><input type="radio" name="vw" value="sea"><span>🌊 ים</span></label>
-            <label class="pl"><input type="radio" name="vw" value="blocked"><span>🧱 חסום</span></label>
-          </div>
-        </div>
-      </div>
+                <div class="card">
+                    <div class="st">
+                        <span class="sn">2</span>
+                         פרטי הנכס
+                    </div>
+                    <div class="g2 mb">
+                        <div>
+                            <label>
+                                גודל (מ"ר) 
+                                <span class="r">*</span>
+                            </label>
+                            <input type="number" id="sz" min="20" max="2000" placeholder="למשל: 84">
+                            <div id="sze" class="err">הזן גודל תקין (20–2000)</div>
+                        </div>
+                        <div>
+                            <label>מספר חדרים</label>
+                            <input type="number" id="rm" min="1" max="12" step="0.5" placeholder="למשל: 4">
+                        </div>
+                    </div>
+                    <div class="mb">
+                        <label>
+                            שנת בניית הבניין 
+                            <span class="r">*</span>
+                        </label>
+                        <div class="pg">
+                            <label class="pl">
+                                <input type="radio" name="by" value="new">
+                                <span>🏗️ 2010 ואילך</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="by" value="mid">
+                                <span>📅 1990–2009</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="by" value="old" checked>
+                                <span>🏛️ 1970–1989</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="by" value="veryold">
+                                <span>🏚️ לפני 1970</span>
+                            </label>
+                        </div>
+                        <div class="hint">גיל הבניין מוריד/מעלה את המחיר בסיסי ב-8–15%</div>
+                    </div>
+                    <div class="g2 mb">
+                        <div>
+                            <label>
+                                קומת הדירה 
+                                <span class="r">*</span>
+                            </label>
+                            <input type="number" id="fl" min="0" max="80" placeholder="0 = קרקע">
+                        </div>
+                        <div>
+                            <label>סה"כ קומות בבניין</label>
+                            <input type="number" id="tf" min="1" max="80" placeholder="למשל: 8">
+                            <div class="hint">חשוב לניקוד הקומה</div>
+                        </div>
+                    </div>
+                    <div class="mb">
+                        <label>מיקום בבניין</label>
+                        <div class="pg">
+                            <label class="pl">
+                                <input type="radio" name="fc" value="front" checked>
+                                <span>🏢 חזית</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="fc" value="rear">
+                                <span>🌿 עורפית</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="fc" value="corner">
+                                <span>📐 פינתית</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb">
+                        <label>כיווני אוויר</label>
+                        <div class="pg">
+                            <label class="pl">
+                                <input type="radio" name="ad" value="1">
+                                <span>1</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="ad" value="2" checked>
+                                <span>2</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="ad" value="3">
+                                <span>3</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="ad" value="4">
+                                <span>4</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label>נוף</label>
+                        <div class="pg">
+                            <label class="pl">
+                                <input type="radio" name="vw" value="urban" checked>
+                                <span>🏙️ עירוני</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="vw" value="open">
+                                <span>🌳 פתוח / פארק</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="vw" value="sea">
+                                <span>🌊 ים</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="vw" value="blocked">
+                                <span>🧱 חסום</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="card">
-        <div class="st"><span class="sn">3</span> תוספות ומצב הנכס</div>
-        <div class="mb">
-          <label>תוספות קיימות</label>
-          <div class="pg">
-            <label class="pl"><input type="checkbox" name="ex" value="elevator"><span>🛗 מעלית</span></label>
-            <label class="pl"><input type="checkbox" name="ex" value="parking"><span>🚗 חניה</span></label>
-            <label class="pl"><input type="checkbox" name="ex" value="storage"><span>🗄️ מחסן</span></label>
-            <label class="pl"><input type="checkbox" name="ex" value="mamad"><span>🛡️ ממ"ד</span></label>
-            <label class="pl"><input type="checkbox" name="ex" value="balcony"><span>🏡 מרפסת שמש</span></label>
-            <label class="pl"><input type="checkbox" name="ex" value="ac"><span>❄️ מיזוג מרכזי</span></label>
-          </div>
-          <div id="balb" class="sb" style="display:none;margin-top:9px">
-            <label>שטח המרפסת (מ"ר) <span class="r">*</span></label>
-            <input type="number" id="balsz" min="1" max="200" step="0.5" placeholder="למשל: 12">
-            <div class="hint">מ"ר מרפסת מחושב כ-50% משווי מ"ר עיקרי (עד 12 מ"ר) ו-40% מעבר לכך — מקדם שמאי מקובל</div>
-          </div>
-        </div>
-        <div class="sep"></div>
-        <div class="mb">
-          <label>מצב הנכס</label>
-          <div class="pg">
-            <label class="pl"><input type="radio" name="cd" value="brandnew"><span>🆕 דירה חדשה (מקבלן)</span></label>
-            <label class="pl"><input type="radio" name="cd" value="new" checked><span>✨ משופץ כחדש</span></label>
-            <label class="pl"><input type="radio" name="cd" value="good"><span>👍 מצב טוב</span></label>
-            <label class="pl"><input type="radio" name="cd" value="partial"><span>🔨 שיפוץ חלקי</span></label>
-            <label class="pl"><input type="radio" name="cd" value="unrenovated"><span>📦 לא משופץ</span></label>
-            <label class="pl"><input type="radio" name="cd" value="renovation"><span>🏚️ שיפוץ מלא</span></label>
-          </div>
-        </div>
-        <div id="cdb" class="sby" style="display:none">
-          <label id="cdl">פרט מצב הנכס (אופציונלי)</label>
-          <textarea id="cdd" placeholder="למשל: מטבח חדש, אמבטיה ישנה..."></textarea>
-        </div>
-        <div class="sep"></div>
-        <div class="mb">
-          <label>רמת גימור</label>
-          <div class="pg">
-            <label class="pl"><input type="radio" name="fn" value="basic"><span>🔧 בסיסי</span></label>
-            <label class="pl"><input type="radio" name="fn" value="standard" checked><span>🏠 סטנדרט</span></label>
-            <label class="pl"><input type="radio" name="fn" value="high"><span>⭐ משופר</span></label>
-            <label class="pl"><input type="radio" name="fn" value="luxury"><span>💎 יוקרתי</span></label>
-          </div>
-          <div class="hint">רמת חומרי הגמר (מטבח, ריצוף, אמבטיות) — בנפרד ממצב התחזוקה</div>
-        </div>
-        <div class="sep"></div>
-        <div class="mb">
-          <label>סטטוס פינוי-בינוי / התחדשות עירונית</label>
-          <div class="pg">
-            <label class="pl"><input type="radio" name="pb" value="none" checked><span>אין / לא רלוונטי</span></label>
-            <label class="pl"><input type="radio" name="pb" value="candidate"><span>מועמד (לא חתום)</span></label>
-            <label class="pl"><input type="radio" name="pb" value="signed"><span>✅ חתום בהסכם</span></label>
-          </div>
-          <div class="hint">דירה חתומה בהסכם פינוי-בינוי שווה יותר. "מועמד" בלבד כמעט ולא משפיע על המחיר</div>
-        </div>
-        <div id="nb" class="sb" style="display:none;margin-top:9px">
-          <label id="nblbl">🏡 פרטי בית קרקע</label>
-          <div class="g2" style="margin-top:7px">
-            <div><label>שטח המגרש (מ"ר) <span class="r">*</span></label><input type="number" id="nl" min="0" placeholder="500"></div>
-            <div><label>שטח בנוי (מ"ר) <span class="r">*</span></label><input type="number" id="nbu" min="0" placeholder="200"></div>
-          </div>
-          <div id="gardenout" class="hint" style="margin-top:7px;font-weight:700;color:#047857"></div>
-          <div id="nts" style="margin-top:7px;display:none">
-            <label>סוג ישוב</label>
-            <select id="nt"><option value="moshav">מושב</option><option value="kibbutz">קיבוץ</option><option value="regional">מועצה אזורית</option><option value="agri_suburb">פרבר חקלאי</option></select>
-          </div>
-        </div>
-      </div>
+                <div class="card">
+                    <div class="st">
+                        <span class="sn">3</span>
+                         תוספות ומצב הנכס
+                    </div>
+                    <div class="mb">
+                        <label>תוספות קיימות</label>
+                        <div class="pg">
+                            <label class="pl">
+                                <input type="checkbox" name="ex" value="elevator">
+                                <span>🛗 מעלית</span>
+                            </label>
+                            <label class="pl">
+                                <input type="checkbox" name="ex" value="parking">
+                                <span>🚗 חניה</span>
+                            </label>
+                            <label class="pl">
+                                <input type="checkbox" name="ex" value="storage">
+                                <span>🗄️ מחסן</span>
+                            </label>
+                            <label class="pl">
+                                <input type="checkbox" name="ex" value="mamad">
+                                <span>🛡️ ממ"ד</span>
+                            </label>
+                            <label class="pl">
+                                <input type="checkbox" name="ex" value="balcony">
+                                <span>🏡 מרפסת שמש</span>
+                            </label>
+                            <label class="pl">
+                                <input type="checkbox" name="ex" value="ac">
+                                <span>❄️ מיזוג מרכזי</span>
+                            </label>
+                        </div>
+                        <div id="balb" class="sb" style="display:none;margin-top:9px">
+                            <label>
+                                שטח המרפסת (מ"ר) 
+                                <span class="r">*</span>
+                            </label>
+                            <input type="number" id="balsz" min="1" max="200" step="0.5" placeholder="למשל: 12">
+                            <div class="hint">מ"ר מרפסת מחושב כ-50% משווי מ"ר עיקרי (עד 12 מ"ר) ו-40% מעבר לכך — מקדם שמאי מקובל</div>
+                        </div>
+                    </div>
+                    <div class="sep"></div>
+                    <div class="mb">
+                        <label>מצב הנכס</label>
+                        <div class="pg">
+                            <label class="pl">
+                                <input type="radio" name="cd" value="brandnew">
+                                <span>🆕 דירה חדשה (מקבלן)</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="cd" value="new" checked>
+                                <span>✨ משופץ כחדש</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="cd" value="good">
+                                <span>👍 מצב טוב</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="cd" value="partial">
+                                <span>🔨 שיפוץ חלקי</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="cd" value="unrenovated">
+                                <span>📦 לא משופץ</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="cd" value="renovation">
+                                <span>🏚️ שיפוץ מלא</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="cdb" class="sby" style="display:none">
+                        <label id="cdl">פרט מצב הנכס (אופציונלי)</label>
+                        <textarea id="cdd" placeholder="למשל: מטבח חדש, אמבטיה ישנה..."></textarea>
+                    </div>
+                    <div class="sep"></div>
+                    <div class="mb">
+                        <label>רמת גימור</label>
+                        <div class="pg">
+                            <label class="pl">
+                                <input type="radio" name="fn" value="basic">
+                                <span>🔧 בסיסי</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="fn" value="standard" checked>
+                                <span>🏠 סטנדרט</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="fn" value="high">
+                                <span>⭐ משופר</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="fn" value="luxury">
+                                <span>💎 יוקרתי</span>
+                            </label>
+                        </div>
+                        <div class="hint">רמת חומרי הגמר (מטבח, ריצוף, אמבטיות) — בנפרד ממצב התחזוקה</div>
+                    </div>
+                    <div class="sep"></div>
+                    <div class="mb">
+                        <label>סטטוס פינוי-בינוי / התחדשות עירונית</label>
+                        <div class="pg">
+                            <label class="pl">
+                                <input type="radio" name="pb" value="none" checked>
+                                <span>אין / לא רלוונטי</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="pb" value="candidate">
+                                <span>מועמד (לא חתום)</span>
+                            </label>
+                            <label class="pl">
+                                <input type="radio" name="pb" value="signed">
+                                <span>✅ חתום בהסכם</span>
+                            </label>
+                        </div>
+                        <div class="hint">דירה חתומה בהסכם פינוי-בינוי שווה יותר. "מועמד" בלבד כמעט ולא משפיע על המחיר</div>
+                    </div>
+                    <div id="nb" class="sb" style="display:none;margin-top:9px">
+                        <label id="nblbl">🏡 פרטי בית קרקע</label>
+                        <div class="g2" style="margin-top:7px">
+                            <div>
+                                <label>
+                                    שטח המגרש (מ"ר) 
+                                    <span class="r">*</span>
+                                </label>
+                                <input type="number" id="nl" min="0" placeholder="500">
+                            </div>
+                            <div>
+                                <label>
+                                    שטח בנוי (מ"ר) 
+                                    <span class="r">*</span>
+                                </label>
+                                <input type="number" id="nbu" min="0" placeholder="200">
+                            </div>
+                        </div>
+                        <div id="gardenout" class="hint" style="margin-top:7px;font-weight:700;color:#047857"></div>
+                        <div id="nts" style="margin-top:7px;display:none">
+                            <label>סוג ישוב</label>
+                            <select id="nt">
+                                <option value="moshav">מושב</option>
+                                <option value="kibbutz">קיבוץ</option>
+                                <option value="regional">מועצה אזורית</option>
+                                <option value="agri_suburb">פרבר חקלאי</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="card">
-        <div class="st"><span class="sn">4</span> קרבה למוקדים (סביבת הנכס)</div>
-        <div class="mb">
-          <label>מה נמצא במרחק הליכה / סמוך לנכס?</label>
-          <div class="pg">
-            <label class="pl"><input type="checkbox" name="pr" value="train"><span>🚆 רכבת / רק"ל / מטרו (עד 500מ')</span></label>
-            <label class="pl"><input type="checkbox" name="pr" value="highway"><span>🛣️ כביש ראשי / מחלף</span></label>
-            <label class="pl"><input type="checkbox" name="pr" value="mall"><span>🛍️ מרכז מסחרי / קניון</span></label>
-            <label class="pl"><input type="checkbox" name="pr" value="school"><span>🏫 בית ספר מבוקש</span></label>
-            <label class="pl"><input type="checkbox" name="pr" value="park"><span>🌳 פארק / שטח ירוק</span></label>
-            <label class="pl"><input type="checkbox" name="pr" value="beach"><span>🏖️ קרבה לים / טיילת</span></label>
-            <label class="pl"><input type="checkbox" name="pr" value="hospital"><span>🏥 בית חולים</span></label>
-            <label class="pl"><input type="checkbox" name="pr" value="employment"><span>💼 מרכז תעסוקה / הייטק</span></label>
-          </div>
-          <div class="hint">קרבה למוקדים מעלה את שווי הנכס. רכבת/רק"ל ברדיוס 500מ' היא בעלת ההשפעה הגבוהה ביותר (מחקרי שמאות: 10%-20%)</div>
-        </div>
-      </div>
+                <div class="card">
+                    <div class="st">
+                        <span class="sn">4</span>
+                         קרבה למוקדים (סביבת הנכס)
+                    </div>
+                    <div class="mb">
+                        <label>מה נמצא במרחק הליכה / סמוך לנכס?</label>
+                        <div class="pg">
+                            <label class="pl">
+                                <input type="checkbox" name="pr" value="train">
+                                <span>🚆 רכבת / רק"ל / מטרו (עד 500מ')</span>
+                            </label>
+                            <label class="pl">
+                                <input type="checkbox" name="pr" value="highway">
+                                <span>🛣️ כביש ראשי / מחלף</span>
+                            </label>
+                            <label class="pl">
+                                <input type="checkbox" name="pr" value="mall">
+                                <span>🛍️ מרכז מסחרי / קניון</span>
+                            </label>
+                            <label class="pl">
+                                <input type="checkbox" name="pr" value="school">
+                                <span>🏫 בית ספר מבוקש</span>
+                            </label>
+                            <label class="pl">
+                                <input type="checkbox" name="pr" value="park">
+                                <span>🌳 פארק / שטח ירוק</span>
+                            </label>
+                            <label class="pl">
+                                <input type="checkbox" name="pr" value="beach">
+                                <span>🏖️ קרבה לים / טיילת</span>
+                            </label>
+                            <label class="pl">
+                                <input type="checkbox" name="pr" value="hospital">
+                                <span>🏥 בית חולים</span>
+                            </label>
+                            <label class="pl">
+                                <input type="checkbox" name="pr" value="employment">
+                                <span>💼 מרכז תעסוקה / הייטק</span>
+                            </label>
+                        </div>
+                        <div class="hint">קרבה למוקדים מעלה את שווי הנכס. רכבת/רק"ל ברדיוס 500מ' היא בעלת ההשפעה הגבוהה ביותר (מחקרי שמאות: 10%-20%)</div>
+                    </div>
+                </div>
 
-      <div class="cb">
-        <div class="st" style="margin-bottom:10px"><span class="sn">5</span> פרטי קשר</div>
-        <div class="g2">
-          <div>
-            <label>שם מלא <span class="r">*</span></label>
-            <input type="text" id="nm" placeholder="שמך המלא">
-            <div id="nme" class="err">נא להזין שם</div>
-          </div>
-          <div>
-            <label>טלפון <span class="r">*</span></label>
-            <input type="tel" id="ph" placeholder="050-0000000">
-            <div id="phe" class="err">נא להזין טלפון</div>
-          </div>
+                <div class="cb">
+                    <div class="st" style="margin-bottom:10px">
+                        <span class="sn">5</span>
+                         פרטי קשר
+                    </div>
+                    <div class="g2">
+                        <div>
+                            <label>
+                                שם מלא 
+                                <span class="r">*</span>
+                            </label>
+                            <input type="text" id="nm" placeholder="שמך המלא">
+                            <div id="nme" class="err">נא להזין שם</div>
+                        </div>
+                        <div>
+                            <label>
+                                טלפון 
+                                <span class="r">*</span>
+                            </label>
+                            <input type="tel" id="ph" placeholder="050-0000000">
+                            <div id="phe" class="err">נא להזין טלפון</div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="bs">📊 חשב שווי שוק עכשיו</button>
+            </form>
         </div>
-      </div>
-      <button type="submit" class="bs">📊 חשב שווי שוק עכשיו</button>
-    </form>
-  </div>
 
-  <!-- LOADING -->
-  <div id="sl" class="sc">
-    <div class="card ls">
-      <div class="sp"></div>
-      <p style="font-weight:800;color:var(--bd);font-size:16px;margin-bottom:4px">מנתח נתוני שוק...</p>
-      <p style="font-size:12px;color:var(--g400)">מצליב עסקאות אמיתיות בשכונה</p>
-      <div style="margin-top:12px">
-        <div class="lst" id="l1">⬜ מזהה שכונה ומחיר בסיס</div>
-        <div class="lst" id="l2">⬜ מכייל לפי גיל הבניין</div>
-        <div class="lst" id="l3">⬜ מחשב קומה, נוף ותוספות</div>
-        <div class="lst" id="l4">⬜ מייצר טווח שווי סופי</div>
-      </div>
+        <!-- LOADING -->
+        <div id="sl" class="sc">
+            <div class="card ls">
+                <div class="sp"></div>
+                <p style="font-weight:800;color:var(--bd);font-size:16px;margin-bottom:4px">מנתח נתוני שוק...</p>
+                <p style="font-size:12px;color:var(--g400)">מצליב עסקאות אמיתיות בשכונה</p>
+                <div style="margin-top:12px">
+                    <div class="lst" id="l1">⬜ מזהה שכונה ומחיר בסיס</div>
+                    <div class="lst" id="l2">⬜ מכייל לפי גיל הבניין</div>
+                    <div class="lst" id="l3">⬜ מחשב קומה, נוף ותוספות</div>
+                    <div class="lst" id="l4">⬜ מייצר טווח שווי סופי</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULT -->
+        <div id="sr" class="sc rs">
+            <div class="rc">
+                <div class="rt">🏠 הערכת שווי הושלמה</div>
+                <div class="rsb" id="rsb"></div>
+                <div class="rr" id="rr"></div>
+                <div class="rpm" id="rpm"></div>
+                <div class="rf" id="rf"></div>
+                <div class="rn" id="rn"></div>
+                <div class="disc">
+                    📐 ההערכה נבנית בשיטה הדומה לזו של שמאי מקרקעין — מחיר בסיס למ"ר לפי שכונה (המייצג דירה ממוצעת ריאלית), ומקדמי התאמה דו-כיווניים לגיל, מצב, קומה, גודל, מרפסת/גינה, גימור, תוספות וקרבה למוקדים. דירה מעל הממוצע עולה, ומתחתיו יורדת.
+                    <br>
+                    <br>
+                    ⚠️ 
+                    <strong>הערכת כיוון בלבד.</strong>
+                     המחשבון מבוסס על מחירי בסיס ממוצעים לשכונה — מדויק יותר באזורי ביקוש, ופחות מדויק בפריפריה ובדירות חריגות בגודלן או במצבן. מחיר מ"ר אמיתי משתנה לפי שכונה, גודל, מצב ועסקאות ספציפיות. בניגוד לשומה מלאה, הכלי אינו כולל ביקור בנכס, בדיקת נסח טאבו או עסקאות השוואה ספציפיות. לתמחור מחייב — שמאי מוסמך ובדיקת עסקאות אמיתיות ברשות המסים/מדלן.
+                </div>
+            </div>
+            <div class="rcta">
+                <h3>🎯 רוצה לדעת מה המשכנתא שתוכל לקבל?</h3>
+                <p>ירדן קובי — יועץ משכנתאות מוסמך | ייעוץ ראשוני ללא עלות</p>
+                <div class="ctab">
+                    <a href="tel:0533030629" class="btp">📞 053-303-0629</a>
+                    <a href="https://wa.me/972533030629?text=היי%20ירדן%2C%20בדקתי%20שווי%20נכס%20ואשמח%20לייעוץ%20משכנתא" target="_blank" class="btw">💬 וואטסאפ</a>
+                </div>
+            </div>
+            <button class="brt" onclick="restart()">🔄 חישוב נכס נוסף</button>
+        </div>
     </div>
-  </div>
 
-  <!-- RESULT -->
-  <div id="sr" class="sc rs">
-    <div class="rc">
-      <div class="rt">🏠 הערכת שווי הושלמה</div>
-      <div class="rsb" id="rsb"></div>
-      <div class="rr" id="rr"></div>
-      <div class="rpm" id="rpm"></div>
-      <div class="rf" id="rf"></div>
-      <div class="rn" id="rn"></div>
-      <div class="disc">📐 ההערכה נבנית בשיטה הדומה לזו של שמאי מקרקעין — מחיר בסיס למ"ר לפי שכונה (המייצג דירה ממוצעת ריאלית), ומקדמי התאמה דו-כיווניים לגיל, מצב, קומה, גודל, מרפסת/גינה, גימור, תוספות וקרבה למוקדים. דירה מעל הממוצע עולה, ומתחתיו יורדת.<br><br>⚠️ <strong>הערכת כיוון בלבד.</strong> המחשבון מבוסס על מחירי בסיס ממוצעים לשכונה — מדויק יותר באזורי ביקוש, ופחות מדויק בפריפריה ובדירות חריגות בגודלן או במצבן. מחיר מ"ר אמיתי משתנה לפי שכונה, גודל, מצב ועסקאות ספציפיות. בניגוד לשומה מלאה, הכלי אינו כולל ביקור בנכס, בדיקת נסח טאבו או עסקאות השוואה ספציפיות. לתמחור מחייב — שמאי מוסמך ובדיקת עסקאות אמיתיות ברשות המסים/מדלן.</div>
-    </div>
-    <div class="rcta">
-      <h3>🎯 רוצה לדעת מה המשכנתא שתוכל לקבל?</h3>
-      <p>ירדן קובי — יועץ משכנתאות מוסמך | ייעוץ ראשוני ללא עלות</p>
-      <div class="ctab">
-        <a href="tel:0533030629" class="btp">📞 053-303-0629</a>
-        <a href="https://wa.me/972533030629?text=היי%20ירדן%2C%20בדקתי%20שווי%20נכס%20ואשמח%20לייעוץ%20משכנתא" target="_blank" class="btw">💬 וואטסאפ</a>
-      </div>
-    </div>
-    <button class="brt" onclick="restart()">🔄 חישוב נכס נוסף</button>
-  </div>
-</div>
+    <script>
+    // =====================================================================
+    // PRICE DATABASE
+    // מחיר הבסיס = דירת יד שנייה בנייה 1985-2005 (ניטרלי)
+    // לפי עסקאות שבוצעו: מדלן / ביזפורטל / נדל"ן סנטר 2024-2025
+    //
+    // תל אביב: צפון ישן ~65K (יד שנייה), פלורנטין ~48K, נאות אפקה ~38K
+    //   (מקור: הרוב, טיים-אאוט 2025, בר-לב נדל"ן)
+    // ====================================================================
+    const DB = {
+        tel_aviv: {
+            lbl: "תל אביב-יפו",
+            def: 52000,
+            n: {
+                "נווה צדק": 85000,
+                "כרם התימנים": 78000,
+                "שיכון בבלי / צהלה": 68000,
+                "הצפון הישן (רובע 3-4)": 63000,
+                "שדה דב (פרויקטים חדשים)": 72000,
+                "רמת אביב ג'": 53000,
+                "נאות אפקה": 38000,
+                "לב העיר / רוטשילד": 58000,
+                "פלורנטין": 46000,
+                "יפו עתיקה / יפו ד'": 33000,
+                "מרכז העיר (אלנבי-דיזנגוף)": 55000,
+                "הצפון החדש / מקווה ישראל": 39000,
+                "נגה / דרום רוטשילד": 36000,
+                "שכונה אחרת (הקלד)": 50000
+            }
+        },
+        jerusalem: {
+            lbl: "ירושלים",
+            def: 30000,
+            n: {
+                "נווה גרנות / ממילא": 66000,
+                "רחביה / טלביה": 52000,
+                "בקעה / גוננים": 40000,
+                "קטמון / ניות": 34000,
+                "בית הכרם / גינות": 30000,
+                "קרית היובל": 23000,
+                "פסגת זאב": 21000,
+                "רמות אלון / רמות ב'": 20000,
+                "גילה / הר חומה": 19000,
+                "תלפיות / ארנונה": 29000,
+                "שכונה אחרת (הקלד)": 26000
+            }
+        },
+        haifa: {
+            lbl: "חיפה",
+            def: 18000,
+            n: {
+                "מרכז הכרמל / אחוזה": 23000,
+                "נווה שאנן / רמות רמז": 18000,
+                "רמת בן-גוריון": 21000,
+                "כרמליה": 25000,
+                "הדר / העיר התחתית": 14000,
+                "נאות פרס / רמת הנשיא": 22000,
+                "קרית חיים / בת גלים": 15000,
+                "קריית אליעזר": 13000,
+                "שכונה אחרת (הקלד)": 17000
+            }
+        },
+        rishon: {
+            lbl: "ראשון לציון",
+            def: 25000,
+            n: {
+                "נחלת יהודה": 32000,
+                "מערב חדש / נאות שקמה": 29000,
+                "נגבה / פארק הים": 34000,
+                "מרכז העיר / רמז": 25000,
+                "רמת אליהו": 21000,
+                "משכנות השרון": 23000,
+                "שכונה אחרת (הקלד)": 25000
+            }
+        },
+        petah_tikva: {
+            lbl: "פתח תקווה",
+            def: 23000,
+            n: {
+                "רמת ורבר": 24000,
+                "כפר גנים א' / ב'": 27000,
+                "כפר גנים ג' / ד'": 25000,
+                "נווה גן / אם המושבות": 24000,
+                "עין גנים": 23000,
+                "הדר גנים / עמישב": 22000,
+                "נווה עוז": 22000,
+                "מרכז העיר / חובבי ציון": 21000,
+                "שכונה אחרת (הקלד)": 22000
+            }
+        },
+        netanya: {
+            lbl: "נתניה",
+            def: 23000,
+            n: {
+                "עיר ימים": 34000,
+                "פולג / אגמים": 30000,
+                "קריית השרון": 26000,
+                "צפון נתניה / שיקמים": 22000,
+                "מרכז העיר": 21000,
+                "נאות שקד / דורה": 17500,
+                "שכונה אחרת (הקלד)": 22000
+            }
+        },
+        ramat_gan: {
+            lbl: "רמת גן",
+            def: 31000,
+            n: {
+                "שכונת החרוזים / ורבורג": 39000,
+                "מרום נווה / רמת חן": 36000,
+                "רמת גן הירוקה": 33000,
+                "מרכז העיר / קריניצי": 30000,
+                "ברקת / שאול המלך": 28000,
+                "רמת עמידר": 25000,
+                "שכונה אחרת (הקלד)": 30000
+            }
+        },
+        herzliya: {
+            lbl: "הרצליה",
+            def: 35000,
+            n: {
+                "הרצליה פיתוח / נוף ים": 58000,
+                "הרצליה הירוקה / צמרות": 40000,
+                "מרכז העיר": 31000,
+                "רבין / גלי כחל": 28000,
+                "נווה עמל": 25000,
+                "שכונה אחרת (הקלד)": 33000
+            }
+        },
+        kfar_saba: {
+            lbl: "כפר סבא",
+            def: 27000,
+            n: {
+                "השכונה הירוקה": 33000,
+                "800 / 900 / 1200": 31000,
+                "קפלן / יוספטל": 26000,
+                "מרכז העיר": 24000,
+                "ותיקים": 22000,
+                "שכונה אחרת (הקלד)": 26000
+            }
+        },
+        holon: {
+            lbl: "חולון",
+            def: 25000,
+            n: {
+                "ח-300": 31000,
+                "קרית אילון": 29000,
+                "אגרובנק": 26000,
+                "נאות רחל": 24000,
+                "ג'סי כהן": 21000,
+                "שכונה אחרת (הקלד)": 24000
+            }
+        },
+        bat_yam: {
+            lbl: "בת ים",
+            def: 25000,
+            n: {
+                "קו החוף / רצועת הים": 36000,
+                "מרכז העיר / פארק": 25000,
+                "רמת הנשיא": 23000,
+                "רמת יוסף": 21000,
+                "שכונה אחרת (הקלד)": 24000
+            }
+        },
+        rehovot: {
+            lbl: "רחובות",
+            def: 23000,
+            n: {
+                "המושבה / מרכז": 28000,
+                "רחובות הירוקה": 24000,
+                "שעריים / דקל": 22000,
+                "קרית משה": 17000,
+                "שכונה אחרת (הקלד)": 21000
+            }
+        },
+        givat_shmuel: {
+            lbl: "גבעת שמואל",
+            def: 34000,
+            n: {
+                "כל השכונות": 34000,
+                "שכונה אחרת (הקלד)": 34000
+            }
+        },
+        givatayim: {
+            lbl: "גבעתיים",
+            def: 36000,
+            n: {
+                "ויצמן / רמת ים": 41000,
+                "בורוכוב": 37000,
+                "קרית שרת": 33000,
+                "שכונה אחרת (הקלד)": 35000
+            }
+        },
+        bnei_brak: {
+            lbl: "בני ברק",
+            def: 22000,
+            n: {
+                "מרכז / ויצמן": 23000,
+                "שכונה אחרת (הקלד)": 21000
+            }
+        },
+        ramat_hasharon: {
+            lbl: "רמת השרון",
+            def: 37000,
+            n: {
+                "נווה גן": 41000,
+                "מרכז": 35000,
+                "שכונה אחרת (הקלד)": 36000
+            }
+        },
+        hod_hasharon: {
+            lbl: "הוד השרון",
+            def: 29000,
+            n: {
+                "מגדיאל / רמת הדר": 31000,
+                "200 / 1200": 32000,
+                "שכונה אחרת (הקלד)": 28000
+            }
+        },
+        raanana: {
+            lbl: "רעננה",
+            def: 32000,
+            n: {
+                "הרכס / יגאל אלון": 35000,
+                "מרכז העיר": 31000,
+                "שכונה אחרת (הקלד)": 31000
+            }
+        },
+        or_yehuda: {
+            lbl: "אור יהודה",
+            def: 22000,
+            n: {
+                "מרכז": 23000,
+                "שכונה אחרת (הקלד)": 21000
+            }
+        },
+        yehud: {
+            lbl: "יהוד-מונוסון",
+            def: 24000,
+            n: {
+                "מרכז": 26000,
+                "שכונה אחרת (הקלד)": 23000
+            }
+        },
+        lod: {
+            lbl: "לוד",
+            def: 14000,
+            n: {
+                "נווה ים / אחווה": 18000,
+                "שכונה אחרת (הקלד)": 13000
+            }
+        },
+        ramla: {
+            lbl: "רמלה",
+            def: 13000,
+            n: {
+                "מרכז": 14000,
+                "שכונה אחרת (הקלד)": 12000
+            }
+        },
+        nes_ziona: {
+            lbl: "נס ציונה",
+            def: 24000,
+            n: {
+                "מרכז / ים": 28000,
+                "שכונה אחרת (הקלד)": 23000
+            }
+        },
+        ashdod: {
+            lbl: "אשדוד",
+            def: 20000,
+            n: {
+                "רובע ט\"ו / י\"א / י\"ז": 25000,
+                "הסיטי / המע\"ר": 23000,
+                "רובע ד' / ה' / ח'": 19000,
+                "רובע א' / ב' / ו'": 16000,
+                "שכונה אחרת (הקלד)": 19000
+            }
+        },
+        ashkelon: {
+            lbl: "אשקלון",
+            def: 15000,
+            n: {
+                "ברנע / עיר ימים": 19000,
+                "אפרידר": 16000,
+                "שמשון / עתיקות": 12500,
+                "שכונה אחרת (הקלד)": 14000
+            }
+        },
+        beer_sheva: {
+            lbl: "באר שבע",
+            def: 10500,
+            n: {
+                "פלח 7 / כלניות": 14000,
+                "רמות / נווה זאב": 12500,
+                "שכונה ב' / ג' / ו'": 10500,
+                "עיר עתיקה / ד'": 9000,
+                "שכונה אחרת (הקלד)": 10500
+            }
+        },
+        hadera: {
+            lbl: "חדרה",
+            def: 17000,
+            n: {
+                "כפר הים / עין הים": 23000,
+                "הפארק": 21000,
+                "מרכז / ויצמן": 16000,
+                "גבעת אולגה": 14000,
+                "שכונה אחרת (הקלד)": 17000
+            }
+        },
+        modiin: {
+            lbl: "מודיעין-מכבים-רעות",
+            def: 28000,
+            n: {
+                "ספיר / מכבים": 30000,
+                "אמירים / עמינדב": 28000,
+                "מבוא מודיעין": 25000,
+                "שכונה אחרת (הקלד)": 27000
+            }
+        },
+        kiryat_ono: {
+            lbl: "קריית אונו",
+            def: 33000,
+            n: {
+                "אונו": 33000,
+                "שכונה אחרת (הקלד)": 31000
+            }
+        },
+        rosh_haayin: {
+            lbl: "ראש העין",
+            def: 22000,
+            n: {
+                "מרכז": 24000,
+                "שכונה אחרת (הקלד)": 21000
+            }
+        },
+        maale_adumim: {
+            lbl: "מעלה אדומים",
+            def: 16000,
+            n: {
+                "מרכז": 17000,
+                "שכונה אחרת (הקלד)": 15000
+            }
+        },
+        beit_shemesh: {
+            lbl: "בית שמש",
+            def: 14500,
+            n: {
+                "רמת בית שמש": 16500,
+                "שכונה אחרת (הקלד)": 13500
+            }
+        },
+        nahariya: {
+            lbl: "נהריה",
+            def: 17000,
+            n: {
+                "מרכז / חוף": 20000,
+                "שכונה אחרת (הקלד)": 16000
+            }
+        },
+        acre: {
+            lbl: "עכו",
+            def: 11500,
+            n: {
+                "עיר עתיקה": 12500,
+                "שכונה אחרת (הקלד)": 10500
+            }
+        },
+        carmiel: {
+            lbl: "כרמיאל",
+            def: 13000,
+            n: {
+                "מרכז": 14000,
+                "שכונה אחרת (הקלד)": 12000
+            }
+        },
+        tiberias: {
+            lbl: "טבריה",
+            def: 10500,
+            n: {
+                "חוף הכינרת": 13500,
+                "שכונה אחרת (הקלד)": 10000
+            }
+        },
+        afula: {
+            lbl: "עפולה",
+            def: 11000,
+            n: {
+                "מרכז": 12000,
+                "שכונה אחרת (הקלד)": 10500
+            }
+        },
+        eilat: {
+            lbl: "אילת",
+            def: 17000,
+            n: {
+                "צפון / מרינה": 21000,
+                "מרכז העיר": 16500,
+                "שכונה אחרת (הקלד)": 16500
+            }
+        },
+        kiryat_gat: {
+            lbl: "קריית גת",
+            def: 10500,
+            n: {
+                "מרכז": 11500,
+                "שכונה אחרת (הקלד)": 10000
+            }
+        },
+        south: {
+            lbl: "דרום / נגב",
+            def: 7500,
+            n: {
+                "דימונה": 7500,
+                "ערד": 7000,
+                "נתיבות": 8500,
+                "אופקים": 7500,
+                "שכונה אחרת (הקלד)": 7500
+            }
+        },
 
-<script>
-// =====================================================================
-// PRICE DATABASE
-// מחיר הבסיס = דירת יד שנייה בנייה 1985-2005 (ניטרלי)
-// לפי עסקאות שבוצעו: מדלן / ביזפורטל / נדל"ן סנטר 2024-2025
-//
-// תל אביב: צפון ישן ~65K (יד שנייה), פלורנטין ~48K, נאות אפקה ~38K
-//   (מקור: הרוב, טיים-אאוט 2025, בר-לב נדל"ן)
-// ====================================================================
-const DB = {
-  tel_aviv:{ lbl:"תל אביב-יפו", def:52000, n:{
-    "נווה צדק":85000,          // עסקאות 2024: ממוצע 89K אבל יד שנייה ישנה ~80-85K
-    "כרם התימנים":78000,
-    "שיכון בבלי / צהלה":68000,
-    "הצפון הישן (רובע 3-4)":63000,  // יד שנייה ~63K (חדשות 70K+)
-    "שדה דב (פרויקטים חדשים)":72000, // בנייה חדשה בלבד
-    "רמת אביב ג'":53000,
-    "נאות אפקה":38000,
-    "לב העיר / רוטשילד":58000,
-    "פלורנטין":46000,            // יד שנייה ~46K (חדשות 52K+)
-    "יפו עתיקה / יפו ד'":33000,
-    "מרכז העיר (אלנבי-דיזנגוף)":55000,
-    "הצפון החדש / מקווה ישראל":39000,
-    "נגה / דרום רוטשילד":36000,
-    "שכונה אחרת (הקלד)":50000
-  }},
-  jerusalem:{ lbl:"ירושלים", def:30000, n:{
-    "נווה גרנות / ממילא":66000,
-    "רחביה / טלביה":52000,
-    "בקעה / גוננים":40000,
-    "קטמון / ניות":34000,
-    "בית הכרם / גינות":30000,
-    "קרית היובל":23000,
-    "פסגת זאב":21000,
-    "רמות אלון / רמות ב'":20000,
-    "גילה / הר חומה":19000,
-    "תלפיות / ארנונה":29000,
-    "שכונה אחרת (הקלד)":26000
-  }},
-  haifa:{ lbl:"חיפה", def:18000, n:{
-    "מרכז הכרמל / אחוזה":23000,
-    "נווה שאנן / רמות רמז":18000,
-    "רמת בן-גוריון":21000,
-    "כרמליה":25000,
-    "הדר / העיר התחתית":14000,
-    "נאות פרס / רמת הנשיא":22000,
-    "קרית חיים / בת גלים":15000,
-    "קריית אליעזר":13000,
-    "שכונה אחרת (הקלד)":17000
-  }},
-  rishon:{ lbl:"ראשון לציון", def:25000, n:{
-    "נחלת יהודה":32000,
-    "מערב חדש / נאות שקמה":29000,
-    "נגבה / פארק הים":34000,
-    "מרכז העיר / רמז":25000,
-    "רמת אליהו":21000,
-    "משכנות השרון":23000,
-    "שכונה אחרת (הקלד)":25000
-  }},
-  petah_tikva:{ lbl:"פתח תקווה", def:23000, n:{
-    // רמת ורבר: ממוצע שוק 24-25K, אבל בנייה ישנה (base) = 24K
-    // (הכפלה של buildYear תסדר את הפערים)
-    "רמת ורבר":24000,
-    "כפר גנים א' / ב'":27000,
-    "כפר גנים ג' / ד'":25000,  // הורדתי מ-26K — רוב העסקאות יד שנייה שנות 80
-    "נווה גן / אם המושבות":24000,
-    "עין גנים":23000,
-    "הדר גנים / עמישב":22000,
-    "נווה עוז":22000,
-    "מרכז העיר / חובבי ציון":21000,
-    "שכונה אחרת (הקלד)":22000
-  }},
-  netanya:{ lbl:"נתניה", def:23000, n:{
-    "עיר ימים":34000,
-    "פולג / אגמים":30000,
-    "קריית השרון":26000,
-    "צפון נתניה / שיקמים":22000,
-    "מרכז העיר":21000,
-    "נאות שקד / דורה":17500,
-    "שכונה אחרת (הקלד)":22000
-  }},
-  ramat_gan:{ lbl:"רמת גן", def:31000, n:{
-    "שכונת החרוזים / ורבורג":39000,
-    "מרום נווה / רמת חן":36000,
-    "רמת גן הירוקה":33000,
-    "מרכז העיר / קריניצי":30000,
-    "ברקת / שאול המלך":28000,
-    "רמת עמידר":25000,
-    "שכונה אחרת (הקלד)":30000
-  }},
-  herzliya:{ lbl:"הרצליה", def:35000, n:{
-    "הרצליה פיתוח / נוף ים":58000, // יד שנייה
-    "הרצליה הירוקה / צמרות":40000,
-    "מרכז העיר":31000,
-    "רבין / גלי כחל":28000,
-    "נווה עמל":25000,
-    "שכונה אחרת (הקלד)":33000
-  }},
-  kfar_saba:{ lbl:"כפר סבא", def:27000, n:{
-    "השכונה הירוקה":33000,
-    "800 / 900 / 1200":31000,
-    "קפלן / יוספטל":26000,
-    "מרכז העיר":24000,
-    "ותיקים":22000,
-    "שכונה אחרת (הקלד)":26000
-  }},
-  holon:{ lbl:"חולון", def:25000, n:{
-    "ח-300":31000,
-    "קרית אילון":29000,
-    "אגרובנק":26000,
-    "נאות רחל":24000,
-    "ג'סי כהן":21000,
-    "שכונה אחרת (הקלד)":24000
-  }},
-  bat_yam:{ lbl:"בת ים", def:25000, n:{
-    "קו החוף / רצועת הים":36000,
-    "מרכז העיר / פארק":25000,
-    "רמת הנשיא":23000,
-    "רמת יוסף":21000,
-    "שכונה אחרת (הקלד)":24000
-  }},
-  rehovot:{ lbl:"רחובות", def:23000, n:{
-    "המושבה / מרכז":28000,
-    "רחובות הירוקה":24000,
-    "שעריים / דקל":22000,
-    "קרית משה":17000,
-    "שכונה אחרת (הקלד)":21000
-  }},
-  givat_shmuel:{ lbl:"גבעת שמואל", def:34000, n:{"כל השכונות":34000,"שכונה אחרת (הקלד)":34000}},
-  givatayim:{ lbl:"גבעתיים", def:36000, n:{
-    "ויצמן / רמת ים":41000,"בורוכוב":37000,"קרית שרת":33000,"שכונה אחרת (הקלד)":35000
-  }},
-  bnei_brak:{ lbl:"בני ברק", def:22000, n:{"מרכז / ויצמן":23000,"שכונה אחרת (הקלד)":21000}},
-  ramat_hasharon:{ lbl:"רמת השרון", def:37000, n:{"נווה גן":41000,"מרכז":35000,"שכונה אחרת (הקלד)":36000}},
-  hod_hasharon:{ lbl:"הוד השרון", def:29000, n:{"מגדיאל / רמת הדר":31000,"200 / 1200":32000,"שכונה אחרת (הקלד)":28000}},
-  raanana:{ lbl:"רעננה", def:32000, n:{"הרכס / יגאל אלון":35000,"מרכז העיר":31000,"שכונה אחרת (הקלד)":31000}},
-  or_yehuda:{ lbl:"אור יהודה", def:22000, n:{"מרכז":23000,"שכונה אחרת (הקלד)":21000}},
-  yehud:{ lbl:"יהוד-מונוסון", def:24000, n:{"מרכז":26000,"שכונה אחרת (הקלד)":23000}},
-  lod:{ lbl:"לוד", def:14000, n:{"נווה ים / אחווה":18000,"שכונה אחרת (הקלד)":13000}},
-  ramla:{ lbl:"רמלה", def:13000, n:{"מרכז":14000,"שכונה אחרת (הקלד)":12000}},
-  nes_ziona:{ lbl:"נס ציונה", def:24000, n:{"מרכז / ים":28000,"שכונה אחרת (הקלד)":23000}},
-  ashdod:{ lbl:"אשדוד", def:20000, n:{
-    "רובע ט\"ו / י\"א / י\"ז":25000,"הסיטי / המע\"ר":23000,
-    "רובע ד' / ה' / ח'":19000,"רובע א' / ב' / ו'":16000,"שכונה אחרת (הקלד)":19000
-  }},
-  ashkelon:{ lbl:"אשקלון", def:15000, n:{
-    "ברנע / עיר ימים":19000,"אפרידר":16000,"שמשון / עתיקות":12500,"שכונה אחרת (הקלד)":14000
-  }},
-  beer_sheva:{ lbl:"באר שבע", def:10500, n:{
-    // כויל לפי עסקאות שנמכרו בפועל 2025-2026 (ynet/כלכליסט): ~10,000-14,500 ₪/מ"ר
-    "פלח 7 / כלניות":14000,"רמות / נווה זאב":12500,
-    "שכונה ב' / ג' / ו'":10500,"עיר עתיקה / ד'":9000,"שכונה אחרת (הקלד)":10500
-  }},
-  hadera:{ lbl:"חדרה", def:17000, n:{
-    "כפר הים / עין הים":23000,"הפארק":21000,
-    "מרכז / ויצמן":16000,"גבעת אולגה":14000,"שכונה אחרת (הקלד)":17000
-  }},
-  modiin:{ lbl:"מודיעין-מכבים-רעות", def:28000, n:{
-    "ספיר / מכבים":30000,"אמירים / עמינדב":28000,"מבוא מודיעין":25000,"שכונה אחרת (הקלד)":27000
-  }},
-  kiryat_ono:{ lbl:"קריית אונו", def:33000, n:{"אונו":33000,"שכונה אחרת (הקלד)":31000}},
-  rosh_haayin:{ lbl:"ראש העין", def:22000, n:{"מרכז":24000,"שכונה אחרת (הקלד)":21000}},
-  maale_adumim:{ lbl:"מעלה אדומים", def:16000, n:{"מרכז":17000,"שכונה אחרת (הקלד)":15000}},
-  beit_shemesh:{ lbl:"בית שמש", def:14500, n:{"רמת בית שמש":16500,"שכונה אחרת (הקלד)":13500}},
-  nahariya:{ lbl:"נהריה", def:17000, n:{"מרכז / חוף":20000,"שכונה אחרת (הקלד)":16000}},
-  acre:{ lbl:"עכו", def:11500, n:{"עיר עתיקה":12500,"שכונה אחרת (הקלד)":10500}},
-  carmiel:{ lbl:"כרמיאל", def:13000, n:{"מרכז":14000,"שכונה אחרת (הקלד)":12000}},
-  tiberias:{ lbl:"טבריה", def:10500, n:{"חוף הכינרת":13500,"שכונה אחרת (הקלד)":10000}},
-  afula:{ lbl:"עפולה", def:11000, n:{"מרכז":12000,"שכונה אחרת (הקלד)":10500}},
-  eilat:{ lbl:"אילת", def:17000, n:{"צפון / מרינה":21000,"מרכז העיר":16500,"שכונה אחרת (הקלד)":16500}},
-  kiryat_gat:{ lbl:"קריית גת", def:10500, n:{"מרכז":11500,"שכונה אחרת (הקלד)":10000}},
-  south:{ lbl:"דרום / נגב", def:7500, n:{"דימונה":7500,"ערד":7000,"נתיבות":8500,"אופקים":7500,"שכונה אחרת (הקלד)":7500}},
+        kfar_shmaryahu: {
+            lbl: "כפר שמריהו",
+            def: 62000,
+            n: {
+                "כל היישוב": 62000,
+                "שכונה אחרת (הקלד)": 60000
+            }
+        },
+        savyon: {
+            lbl: "סביון",
+            def: 58000,
+            n: {
+                "סביון": 58000,
+                "גני יהודה": 46000,
+                "שכונה אחרת (הקלד)": 55000
+            }
+        },
+        arsuf: {
+            lbl: "ארסוף",
+            def: 55000,
+            n: {
+                "ארסוף כפר": 55000,
+                "שכונה אחרת (הקלד)": 52000
+            }
+        },
+        rishpon: {
+            lbl: "רשפון",
+            def: 48000,
+            n: {
+                "רשפון": 48000,
+                "שכונה אחרת (הקלד)": 46000
+            }
+        },
+        udim: {
+            lbl: "אודים",
+            def: 42000,
+            n: {
+                "אודים": 42000,
+                "שכונה אחרת (הקלד)": 40000
+            }
+        },
+        batzra: {
+            lbl: "בצרה",
+            def: 43000,
+            n: {
+                "בצרה": 43000,
+                "שכונה אחרת (הקלד)": 41000
+            }
+        },
+        neve_yarak: {
+            lbl: "נווה ירק",
+            def: 44000,
+            n: {
+                "נווה ירק": 44000,
+                "שכונה אחרת (הקלד)": 42000
+            }
+        },
+        kfar_neter: {
+            lbl: "כפר נטר",
+            def: 44000,
+            n: {
+                "כפר נטר": 44000,
+                "שכונה אחרת (הקלד)": 42000
+            }
+        },
+        bnei_zion: {
+            lbl: "בני ציון",
+            def: 45000,
+            n: {
+                "בני ציון": 45000,
+                "שכונה אחרת (הקלד)": 43000
+            }
+        },
+        tzur_yitzhak: {
+            lbl: "צור יצחק",
+            def: 33000,
+            n: {
+                "צור יצחק": 33000,
+                "שכונה אחרת (הקלד)": 31000
+            }
+        },
+        harutzim: {
+            lbl: "חרוצים",
+            def: 46000,
+            n: {
+                "חרוצים": 46000,
+                "שכונה אחרת (הקלד)": 44000
+            }
+        },
+        caesarea: {
+            lbl: "קיסריה",
+            def: 40000,
+            n: {
+                "קיסריה": 40000,
+                "שכונה אחרת (הקלד)": 38000
+            }
+        },
+        binyamina: {
+            lbl: "בנימינה-גבעת עדה",
+            def: 31000,
+            n: {
+                "בנימינה": 32000,
+                "גבעת עדה": 29000,
+                "שכונה אחרת (הקלד)": 30000
+            }
+        },
+        zichron: {
+            lbl: "זכרון יעקב",
+            def: 32000,
+            n: {
+                "מרכז המושבה": 34000,
+                "רמת צבי": 31000,
+                "שכונה אחרת (הקלד)": 31000
+            }
+        },
+        kochav_yair: {
+            lbl: "כוכב יאיר-צור יגאל",
+            def: 35000,
+            n: {
+                "כוכב יאיר": 36000,
+                "צור יגאל": 34000,
+                "שכונה אחרת (הקלד)": 34000
+            }
+        },
+        shoham: {
+            lbl: "שוהם",
+            def: 30000,
+            n: {
+                "שוהם": 30000,
+                "שכונה אחרת (הקלד)": 29000
+            }
+        },
+        ramat_yishai: {
+            lbl: "רמת ישי",
+            def: 28000,
+            n: {
+                "רמת ישי": 28000,
+                "שכונה אחרת (הקלד)": 27000
+            }
+        },
+        kiryat_tivon: {
+            lbl: "קריית טבעון",
+            def: 27000,
+            n: {
+                "טבעון": 27000,
+                "שכונה אחרת (הקלד)": 26000
+            }
+        },
+        omer: {
+            lbl: "עומר",
+            def: 24000,
+            n: {
+                "עומר": 24000,
+                "שכונה אחרת (הקלד)": 23000
+            }
+        },
+        lehavim: {
+            lbl: "להבים",
+            def: 23000,
+            n: {
+                "להבים": 23000,
+                "שכונה אחרת (הקלד)": 22000
+            }
+        },
+        meitar: {
+            lbl: "מיתר",
+            def: 21000,
+            n: {
+                "מיתר": 21000,
+                "שכונה אחרת (הקלד)": 20000
+            }
+        },
 
-  // ====== יישובי יוקרה (הערכות בלבד — לא נתוני עסקאות חיים) ======
-  kfar_shmaryahu:{ lbl:"כפר שמריהו", def:62000, n:{"כל היישוב":62000,"שכונה אחרת (הקלד)":60000}},
-  savyon:{ lbl:"סביון", def:58000, n:{"סביון":58000,"גני יהודה":46000,"שכונה אחרת (הקלד)":55000}},
-  arsuf:{ lbl:"ארסוף", def:55000, n:{"ארסוף כפר":55000,"שכונה אחרת (הקלד)":52000}},
-  rishpon:{ lbl:"רשפון", def:48000, n:{"רשפון":48000,"שכונה אחרת (הקלד)":46000}},
-  udim:{ lbl:"אודים", def:42000, n:{"אודים":42000,"שכונה אחרת (הקלד)":40000}},
-  batzra:{ lbl:"בצרה", def:43000, n:{"בצרה":43000,"שכונה אחרת (הקלד)":41000}},
-  neve_yarak:{ lbl:"נווה ירק", def:44000, n:{"נווה ירק":44000,"שכונה אחרת (הקלד)":42000}},
-  kfar_neter:{ lbl:"כפר נטר", def:44000, n:{"כפר נטר":44000,"שכונה אחרת (הקלד)":42000}},
-  bnei_zion:{ lbl:"בני ציון", def:45000, n:{"בני ציון":45000,"שכונה אחרת (הקלד)":43000}},
-  tzur_yitzhak:{ lbl:"צור יצחק", def:33000, n:{"צור יצחק":33000,"שכונה אחרת (הקלד)":31000}},
-  harutzim:{ lbl:"חרוצים", def:46000, n:{"חרוצים":46000,"שכונה אחרת (הקלד)":44000}},
-  caesarea:{ lbl:"קיסריה", def:40000, n:{"קיסריה":40000,"שכונה אחרת (הקלד)":38000}},
-  binyamina:{ lbl:"בנימינה-גבעת עדה", def:31000, n:{"בנימינה":32000,"גבעת עדה":29000,"שכונה אחרת (הקלד)":30000}},
-  zichron:{ lbl:"זכרון יעקב", def:32000, n:{"מרכז המושבה":34000,"רמת צבי":31000,"שכונה אחרת (הקלד)":31000}},
-  kochav_yair:{ lbl:"כוכב יאיר-צור יגאל", def:35000, n:{"כוכב יאיר":36000,"צור יגאל":34000,"שכונה אחרת (הקלד)":34000}},
-  shoham:{ lbl:"שוהם", def:30000, n:{"שוהם":30000,"שכונה אחרת (הקלד)":29000}},
-  ramat_yishai:{ lbl:"רמת ישי", def:28000, n:{"רמת ישי":28000,"שכונה אחרת (הקלד)":27000}},
-  kiryat_tivon:{ lbl:"קריית טבעון", def:27000, n:{"טבעון":27000,"שכונה אחרת (הקלד)":26000}},
-  omer:{ lbl:"עומר", def:24000, n:{"עומר":24000,"שכונה אחרת (הקלד)":23000}},
-  lehavim:{ lbl:"להבים", def:23000, n:{"להבים":23000,"שכונה אחרת (הקלד)":22000}},
-  meitar:{ lbl:"מיתר", def:21000, n:{"מיתר":21000,"שכונה אחרת (הקלד)":20000}},
+        givat_brenner: {
+            lbl: "גן יבנה / יבנה",
+            def: 23000,
+            n: {
+                "יבנה": 24000,
+                "גן יבנה": 23000,
+                "שכונה אחרת (הקלד)": 22000
+            }
+        },
+        gedera: {
+            lbl: "גדרה",
+            def: 23000,
+            n: {
+                "גדרה": 23000,
+                "שכונה אחרת (הקלד)": 22000
+            }
+        },
+        mazkeret_batya: {
+            lbl: "מזכרת בתיה",
+            def: 28000,
+            n: {
+                "מזכרת בתיה": 28000,
+                "שכונה אחרת (הקלד)": 27000
+            }
+        },
+        gan_yavne: {
+            lbl: "קריית עקרון",
+            def: 20000,
+            n: {
+                "קריית עקרון": 20000,
+                "שכונה אחרת (הקלד)": 19000
+            }
+        },
+        ganei_tikva: {
+            lbl: "גני תקווה",
+            def: 33000,
+            n: {
+                "גני תקווה": 33000,
+                "גני יהודה": 34000,
+                "שכונה אחרת (הקלד)": 32000
+            }
+        },
+        elad: {
+            lbl: "אלעד",
+            def: 21000,
+            n: {
+                "אלעד": 21000,
+                "שכונה אחרת (הקלד)": 20000
+            }
+        },
+        kadima: {
+            lbl: "קדימה-צורן",
+            def: 28000,
+            n: {
+                "קדימה": 28000,
+                "צורן": 29000,
+                "שכונה אחרת (הקלד)": 27000
+            }
+        },
+        pardes_hana: {
+            lbl: "פרדס חנה-כרכור",
+            def: 24000,
+            n: {
+                "פרדס חנה": 25000,
+                "כרכור": 23000,
+                "שכונה אחרת (הקלד)": 24000
+            }
+        },
+        yokneam: {
+            lbl: "יקנעם עילית",
+            def: 23000,
+            n: {
+                "יקנעם": 23000,
+                "שכונה אחרת (הקלד)": 22000
+            }
+        },
+        nesher: {
+            lbl: "נשר",
+            def: 18000,
+            n: {
+                "נשר": 18000,
+                "שכונה אחרת (הקלד)": 17000
+            }
+        },
+        kiryat_motzkin: {
+            lbl: "קריית מוצקין",
+            def: 16000,
+            n: {
+                "מוצקין": 16000,
+                "שכונה אחרת (הקלד)": 15000
+            }
+        },
+        kiryat_bialik: {
+            lbl: "קריית ביאליק",
+            def: 16000,
+            n: {
+                "ביאליק": 16000,
+                "שכונה אחרת (הקלד)": 15000
+            }
+        },
+        kiryat_yam: {
+            lbl: "קריית ים",
+            def: 14000,
+            n: {
+                "קריית ים": 14000,
+                "שכונה אחרת (הקלד)": 13000
+            }
+        },
+        kiryat_ata: {
+            lbl: "קריית אתא",
+            def: 15000,
+            n: {
+                "קריית אתא": 15000,
+                "שכונה אחרת (הקלד)": 14000
+            }
+        },
+        migdal_haemek: {
+            lbl: "מגדל העמק",
+            def: 13000,
+            n: {
+                "מגדל העמק": 13000,
+                "שכונה אחרת (הקלד)": 12000
+            }
+        },
 
-  // ====== מרכז / מבוקש ======
-  givat_brenner:{ lbl:"גן יבנה / יבנה", def:23000, n:{"יבנה":24000,"גן יבנה":23000,"שכונה אחרת (הקלד)":22000}},
-  gedera:{ lbl:"גדרה", def:23000, n:{"גדרה":23000,"שכונה אחרת (הקלד)":22000}},
-  mazkeret_batya:{ lbl:"מזכרת בתיה", def:28000, n:{"מזכרת בתיה":28000,"שכונה אחרת (הקלד)":27000}},
-  gan_yavne:{ lbl:"קריית עקרון", def:20000, n:{"קריית עקרון":20000,"שכונה אחרת (הקלד)":19000}},
-  ganei_tikva:{ lbl:"גני תקווה", def:33000, n:{"גני תקווה":33000,"גני יהודה":34000,"שכונה אחרת (הקלד)":32000}},
-  elad:{ lbl:"אלעד", def:21000, n:{"אלעד":21000,"שכונה אחרת (הקלד)":20000}},
-  kadima:{ lbl:"קדימה-צורן", def:28000, n:{"קדימה":28000,"צורן":29000,"שכונה אחרת (הקלד)":27000}},
-  pardes_hana:{ lbl:"פרדס חנה-כרכור", def:24000, n:{"פרדס חנה":25000,"כרכור":23000,"שכונה אחרת (הקלד)":24000}},
-  yokneam:{ lbl:"יקנעם עילית", def:23000, n:{"יקנעם":23000,"שכונה אחרת (הקלד)":22000}},
-  nesher:{ lbl:"נשר", def:18000, n:{"נשר":18000,"שכונה אחרת (הקלד)":17000}},
-  kiryat_motzkin:{ lbl:"קריית מוצקין", def:16000, n:{"מוצקין":16000,"שכונה אחרת (הקלד)":15000}},
-  kiryat_bialik:{ lbl:"קריית ביאליק", def:16000, n:{"ביאליק":16000,"שכונה אחרת (הקלד)":15000}},
-  kiryat_yam:{ lbl:"קריית ים", def:14000, n:{"קריית ים":14000,"שכונה אחרת (הקלד)":13000}},
-  kiryat_ata:{ lbl:"קריית אתא", def:15000, n:{"קריית אתא":15000,"שכונה אחרת (הקלד)":14000}},
-  migdal_haemek:{ lbl:"מגדל העמק", def:13000, n:{"מגדל העמק":13000,"שכונה אחרת (הקלד)":12000}},
+        nof_hagalil: {
+            lbl: "נוף הגליל",
+            def: 13000,
+            n: {
+                "נוף הגליל": 13000,
+                "שכונה אחרת (הקלד)": 12000
+            }
+        },
+        maalot: {
+            lbl: "מעלות-תרשיחא",
+            def: 11500,
+            n: {
+                "מעלות": 11500,
+                "שכונה אחרת (הקלד)": 10500
+            }
+        },
+        shlomi: {
+            lbl: "שלומי",
+            def: 11000,
+            n: {
+                "שלומי": 11000,
+                "שכונה אחרת (הקלד)": 10000
+            }
+        },
+        kiryat_shmona: {
+            lbl: "קריית שמונה",
+            def: 9000,
+            n: {
+                "קריית שמונה": 9000,
+                "שכונה אחרת (הקלד)": 8500
+            }
+        },
+        safed: {
+            lbl: "צפת",
+            def: 11000,
+            n: {
+                "העיר העתיקה": 13000,
+                "מרכז": 10500,
+                "שכונה אחרת (הקלד)": 10500
+            }
+        },
+        safsufa: {
+            lbl: "ספסופה / מירון אזור",
+            def: 13000,
+            n: {
+                "ספסופה": 13000,
+                "מירון": 12000,
+                "שכונה אחרת (הקלד)": 12000
+            }
+        },
+        rosh_pina: {
+            lbl: "ראש פינה",
+            def: 18000,
+            n: {
+                "ראש פינה": 18000,
+                "שכונה אחרת (הקלד)": 16000
+            }
+        },
+        hatzor: {
+            lbl: "חצור הגלילית",
+            def: 8500,
+            n: {
+                "חצור": 8500,
+                "שכונה אחרת (הקלד)": 8000
+            }
+        },
+        beit_shean: {
+            lbl: "בית שאן",
+            def: 8500,
+            n: {
+                "בית שאן": 8500,
+                "שכונה אחרת (הקלד)": 8000
+            }
+        },
+        migdal: {
+            lbl: "מגדל / כנרת אזור",
+            def: 16000,
+            n: {
+                "מגדל": 16000,
+                "שכונה אחרת (הקלד)": 14000
+            }
+        },
+        yavniel: {
+            lbl: "יבנאל",
+            def: 11000,
+            n: {
+                "יבנאל": 11000,
+                "שכונה אחרת (הקלד)": 10000
+            }
+        },
+        sderot: {
+            lbl: "שדרות",
+            def: 9500,
+            n: {
+                "שדרות": 9500,
+                "שכונה אחרת (הקלד)": 9000
+            }
+        },
+        ofakim: {
+            lbl: "אופקים",
+            def: 7500,
+            n: {
+                "אופקים": 7500,
+                "שכונה אחרת (הקלד)": 7000
+            }
+        },
+        netivot_s: {
+            lbl: "נתיבות",
+            def: 8500,
+            n: {
+                "נתיבות": 8500,
+                "שכונה אחרת (הקלד)": 8000
+            }
+        },
+        mitzpe_ramon: {
+            lbl: "מצפה רמון",
+            def: 8000,
+            n: {
+                "מצפה רמון": 8000,
+                "שכונה אחרת (הקלד)": 7500
+            }
+        },
+        yeruham: {
+            lbl: "ירוחם",
+            def: 7000,
+            n: {
+                "ירוחם": 7000,
+                "שכונה אחרת (הקלד)": 6500
+            }
+        },
 
-  // ====== פריפריה / צפון ======
-  nof_hagalil:{ lbl:"נוף הגליל", def:13000, n:{"נוף הגליל":13000,"שכונה אחרת (הקלד)":12000}},
-  maalot:{ lbl:"מעלות-תרשיחא", def:11500, n:{"מעלות":11500,"שכונה אחרת (הקלד)":10500}},
-  shlomi:{ lbl:"שלומי", def:11000, n:{"שלומי":11000,"שכונה אחרת (הקלד)":10000}},
-  kiryat_shmona:{ lbl:"קריית שמונה", def:9000, n:{"קריית שמונה":9000,"שכונה אחרת (הקלד)":8500}},
-  safed:{ lbl:"צפת", def:11000, n:{"העיר העתיקה":13000,"מרכז":10500,"שכונה אחרת (הקלד)":10500}},
-  safsufa:{ lbl:"ספסופה / מירון אזור", def:13000, n:{"ספסופה":13000,"מירון":12000,"שכונה אחרת (הקלד)":12000}},
-  rosh_pina:{ lbl:"ראש פינה", def:18000, n:{"ראש פינה":18000,"שכונה אחרת (הקלד)":16000}},
-  hatzor:{ lbl:"חצור הגלילית", def:8500, n:{"חצור":8500,"שכונה אחרת (הקלד)":8000}},
-  beit_shean:{ lbl:"בית שאן", def:8500, n:{"בית שאן":8500,"שכונה אחרת (הקלד)":8000}},
-  migdal:{ lbl:"מגדל / כנרת אזור", def:16000, n:{"מגדל":16000,"שכונה אחרת (הקלד)":14000}},
-  yavniel:{ lbl:"יבנאל", def:11000, n:{"יבנאל":11000,"שכונה אחרת (הקלד)":10000}},
-  sderot:{ lbl:"שדרות", def:9500, n:{"שדרות":9500,"שכונה אחרת (הקלד)":9000}},
-  ofakim:{ lbl:"אופקים", def:7500, n:{"אופקים":7500,"שכונה אחרת (הקלד)":7000}},
-  netivot_s:{ lbl:"נתיבות", def:8500, n:{"נתיבות":8500,"שכונה אחרת (הקלד)":8000}},
-  mitzpe_ramon:{ lbl:"מצפה רמון", def:8000, n:{"מצפה רמון":8000,"שכונה אחרת (הקלד)":7500}},
-  yeruham:{ lbl:"ירוחם", def:7000, n:{"ירוחם":7000,"שכונה אחרת (הקלד)":6500}},
+        other_city: {
+            lbl: "עיר אחרת",
+            def: 13000,
+            n: {
+                "הזן כתובת מלאה": 13000
+            }
+        }
+    };
 
-  other_city:{ lbl:"עיר אחרת", def:13000, n:{"הזן כתובת מלאה":13000}}
-};
+    const BY_M = {
+        new: 1.13,
+        mid: 1.05,
+        old: 1.00,
+        veryold: 0.91
+    };
+    const BY_L = {
+        new: 'בנייה חדשה (2010+)',
+        mid: 'בנייה 1990-2009',
+        old: 'בנייה 1970-1989',
+        veryold: 'בנייה לפני 1970'
+    };
+    const BY_N = {
+        new: '+13%',
+        mid: '+5%',
+        old: 'בסיס',
+        veryold: '-9%'
+    };
+    const BY_C = {
+        new: 'pos',
+        mid: 'pos',
+        old: 'neu',
+        veryold: 'neg'
+    };
 
-// BUILD YEAR — מתייחס לבנייה 1985-2005 כבסיס
-// שים לב: שדה דב וכד' שהם בנייה חדשה בלבד — מחיר הבסיס שלהם כבר גבוה
-// לכן הכפלת new תוסיף עוד, מה שמשקף דירות חדשות מעל הממוצע
-const BY_M = { new:1.13, mid:1.05, old:1.00, veryold:0.91 };
-const BY_L = { new:'בנייה חדשה (2010+)', mid:'בנייה 1990-2009', old:'בנייה 1970-1989', veryold:'בנייה לפני 1970' };
-const BY_N = { new:'+13%', mid:'+5%', old:'בסיס', veryold:'-9%' };
-const BY_C = { new:'pos', mid:'pos', old:'neu', veryold:'neg' };
+    const FN_M = {
+        basic: 0.95,
+        standard: 1.00,
+        high: 1.06,
+        luxury: 1.13
+    };
+    const FN_L = {
+        basic: 'גימור בסיסי',
+        standard: 'גימור סטנדרט',
+        high: 'גימור משופר',
+        luxury: 'גימור יוקרתי'
+    };
+    const FN_N = {
+        basic: '-5%',
+        standard: 'בסיס',
+        high: '+6%',
+        luxury: '+13%'
+    };
+    const FN_C = {
+        basic: 'neg',
+        standard: 'neu',
+        high: 'pos',
+        luxury: 'pos'
+    };
 
-// FINISH LEVEL — רמת גימור (חומרי גמר), בנפרד ממצב/תחזוקה
-const FN_M = { basic:0.95, standard:1.00, high:1.06, luxury:1.13 };
-const FN_L = { basic:'גימור בסיסי', standard:'גימור סטנדרט', high:'גימור משופר', luxury:'גימור יוקרתי' };
-const FN_N = { basic:'-5%', standard:'בסיס', high:'+6%', luxury:'+13%' };
-const FN_C = { basic:'neg', standard:'neu', high:'pos', luxury:'pos' };
+    const PB_M = {
+        none: 1.00,
+        candidate: 1.03,
+        signed: 1.25
+    };
+    const PB_L = {
+        none: 'אין',
+        candidate: 'מועמד (לא חתום)',
+        signed: 'חתום בהסכם פינוי-בינוי'
+    };
+    const PB_N = {
+        none: '–',
+        candidate: '+3%',
+        signed: '+25%'
+    };
+    const PB_C = {
+        none: 'neu',
+        candidate: 'neu',
+        signed: 'pos'
+    };
 
-// PINUI-BINUI — חתום בלבד מוסיף ערך. מועמד כמעט ולא משפיע
-const PB_M = { none:1.00, candidate:1.03, signed:1.25 };
-const PB_L = { none:'אין', candidate:'מועמד (לא חתום)', signed:'חתום בהסכם פינוי-בינוי' };
-const PB_N = { none:'–', candidate:'+3%', signed:'+25%' };
-const PB_C = { none:'neu', candidate:'neu', signed:'pos' };
-
-const $=id=>document.getElementById(id);
-function ss(n){document.querySelectorAll('.sc').forEach(s=>s.classList.remove('a'));$('s'+n).classList.add('a');window.scrollTo({top:0,behavior:'smooth'})}
-
-$('cs').addEventListener('change',function(){
-  const k=this.value,ns=$('ns');
-  $('cnb').style.display='none';$('fab').style.display='none';
-  $('ce').classList.remove('s');
-  ns.innerHTML='<option value="">-- בחר שכונה --</option>';
-  ns.disabled=true;
-  if(!k)return;
-  if(k==='other_city'){$('fab').style.display='block';ns.innerHTML='<option value="free_city">כתובת מלאה בשדה למטה</option>';ns.disabled=false;return;}
-  if(!DB[k])return;
-  ns.disabled=false;
-  Object.keys(DB[k].n).forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n;ns.appendChild(o);});
-});
-
-$('ns').addEventListener('change',function(){
-  $('ne').classList.remove('s');
-  $('cnb').style.display=(this.value.includes('הקלד')||this.value.includes('אחרת'))?'block':'none';
-});
-document.querySelectorAll('input[name="cd"]').forEach(r=>r.addEventListener('change',function(){
-  $('cdb').style.display='block';
-  $('cdl').textContent=(this.value==='new'||this.value==='good'||this.value==='brandnew')?'מה כולל השיפוץ? (אופציונלי)':'מה צריך שיפוץ?';
-}));
-function isGround(pt){return pt==='cottage'||pt==='nachla';}
-function updateGroundGarden(){
-  const land=parseFloat($('nl').value)||0, built=parseFloat($('nbu').value)||0;
-  const out=$('gardenout');
-  if(land>0&&built>0){
-    const g=land-built;
-    if(g>=0){out.textContent=`🌳 שטח גינה/חצר מחושב: ${g.toLocaleString('he-IL')} מ"ר (מגרש ${land.toLocaleString('he-IL')} − בנוי ${built.toLocaleString('he-IL')})`;out.style.color='#047857';}
-    else{out.textContent=`⚠️ השטח הבנוי גדול מהמגרש — בדוק את הנתונים`;out.style.color='#e11d48';}
-  }else{out.textContent='';}
-}
-$('pt').addEventListener('change',function(){
-  const g=isGround(this.value);
-  $('nb').style.display=g?'block':'none';
-  $('nblbl').textContent=this.value==='nachla'?'🌾 פרטי נחלה / מגרש':'🏡 פרטי בית קרקע';
-  $('nts').style.display=this.value==='nachla'?'block':'none';
-  if(g)updateGroundGarden();
-});
-$('nl').addEventListener('input',updateGroundGarden);
-$('nbu').addEventListener('input',updateGroundGarden);
-
-// Balcony size toggle
-document.querySelector('input[name="ex"][value="balcony"]').addEventListener('change',function(){
-  $('balb').style.display=this.checked?'block':'none';
-});
-
-function validate(){
-  let ok=true;
-  if(!$('cs').value){$('ce').classList.add('s');ok=false;}
-  if(!$('ns').value){$('ne').classList.add('s');ok=false;}
-  const sz=parseFloat($('sz').value);
-  if(!sz||sz<20||sz>2000){$('sze').classList.add('s');ok=false;}
-  const pt=$('pt').value;
-  if(isGround(pt)){
-    const land=parseFloat($('nl').value),built=parseFloat($('nbu').value);
-    if(!land||!built){alert('עבור בית קרקע / נחלה — יש להזין שטח מגרש ושטח בנוי');ok=false;}
-  }
-  const balOn=document.querySelector('input[name="ex"][value="balcony"]').checked;
-  if(balOn&&!(parseFloat($('balsz').value)>0)){alert('סימנת מרפסת — יש להזין את שטח המרפסת במ"ר');ok=false;}
-  if(!$('nm').value.trim()){$('nme').classList.add('s');ok=false;}
-  if(!$('ph').value.trim()){$('phe').classList.add('s');ok=false;}
-  return ok;
-}
-
-function calcVal(d){
-  const db=DB[d.ck];
-  let base=db?(d.nh&&db.n[d.nh]?db.n[d.nh]:db.def):15000;
-  let m=1.0;const f=[];
-
-  // Build year
-  const by=d.by||'old';
-  m*=BY_M[by];
-  f.push({l:'גיל הבניין',v:BY_L[by],n:BY_N[by],c:BY_C[by]});
-
-  // Condition
-  const cM={brandnew:1.05,new:1.00,good:0.93,partial:0.85,unrenovated:0.82,renovation:0.73};
-  const cN={brandnew:'+5%',new:'–',good:'-7%',partial:'-15%',unrenovated:'-18%',renovation:'-27%'};
-  const cL={brandnew:'חדשה מקבלן',new:'משופץ כחדש',good:'מצב טוב',partial:'שיפוץ חלקי',unrenovated:'לא משופץ',renovation:'שיפוץ מלא'};
-  const cC={brandnew:'pos',new:'pos',good:'neu',partial:'neg',unrenovated:'neg',renovation:'neg'};
-  m*=cM[d.cd];
-  f.push({l:'מצב',v:cL[d.cd],n:cN[d.cd],c:cC[d.cd]});
-
-  // Size correction — מחיר מ"ר עולה ככל שהדירה קטנה, יורד ככל שגדולה.
-  // עוגן ניטרלי 90 מ"ר. מתון, עם תקרה/רצפה (לא חל על בית קרקע/נחלה)
-  if(!isGround(d.pt)){
-    const sz=d.sz||90;
-    let szM=1.0;
-    if(sz<55)szM=1.10;
-    else if(sz<70)szM=1.06;
-    else if(sz<85)szM=1.03;
-    else if(sz<=100)szM=1.0;
-    else if(sz<=130)szM=0.97;
-    else if(sz<=170)szM=0.94;
-    else szM=0.91;
-    if(szM!==1.0){m*=szM;f.push({l:'גודל דירה',v:`${sz} מ"ר`,n:szM>1?`+${Math.round((szM-1)*100)}%/מ"ר`:`${Math.round((szM-1)*100)}%/מ"ר`,c:szM>1?'pos':'neg'});}
-  }
-
-  // Floor
-  const fl=parseInt(d.fl)||0,tot=parseInt(d.tf)||1,ratio=fl/Math.max(tot,1);
-  let fm=1.0;
-  if(fl===0){fm=d.pt==='garden'?1.05:0.93;f.push({l:'קומה',v:`קרקע מתוך ${tot}`,n:d.pt==='garden'?'+5%':'-7%',c:d.pt==='garden'?'pos':'neg'});}
-  else if(fl===1){fm=0.96;f.push({l:'קומה',v:`${fl}/${tot}`,n:'-4%',c:'neg'});}
-  else if(ratio>0.85){fm=d.pt==='penthouse'?1.25:1.08;f.push({l:'קומה',v:`${fl}/${tot} ⬆️`,n:d.pt==='penthouse'?'+25%':'+8%',c:'pos'});}
-  else if(fl>=4){fm=1.04+Math.min(ratio*0.04,0.06);f.push({l:'קומה',v:`${fl}/${tot}`,n:`+${Math.round((fm-1)*100)}%`,c:'pos'});}
-  else{f.push({l:'קומה',v:`${fl}/${tot}`,n:'ניטרלי',c:'neu'});}
-  m*=fm;
-
-  // ===== תוספות: מקדמים דו-כיווניים תלויי-גיל =====
-  // הבסיס מייצג דירה ממוצעת לשכונה. בנייה חדשה כבר "אמורה" לכלול ממ"ד+חניה+מרפסת,
-  // לכן נוכחותם ניטרלית והיעדרם קנס. בבנייה ישנה זה הפוך — נוכחותם בונוס.
-  const isNew = (d.by==='new'||d.by==='mid'); // נבנה ~1990 ואילך
-  const has = k => d.ex.includes(k);
-
-  // מעלית
-  const hE=has('elevator');
-  if(fl>=4&&!hE){m*=0.92;f.push({l:'מעלית',v:'אין (קומה גבוהה)',n:'-8%',c:'neg'});}
-  else if(hE&&fl>=4){f.push({l:'מעלית',v:'יש',n:'ניטרלי',c:'neu'});}
-
-  // ממ"ד
-  if(has('mamad')){
-    if(isNew){f.push({l:'ממ"ד',v:'יש',n:'תקני',c:'neu'});}      // מצופה — ניטרלי
-    else{m*=1.05;f.push({l:'ממ"ד',v:'יש (בבניין ישן)',n:'+5%',c:'pos'});} // נדיר בישן — בונוס
-  }else{
-    if(isNew){m*=0.98;f.push({l:'ממ"ד',v:'חסר (חריג לבנייה חדשה)',n:'-2%',c:'neg'});}
-    // בבנייה ישנה היעדר ממ"ד נורמלי — ניטרלי, לא מציינים
-  }
-
-  // חניה
-  if(has('parking')){
-    if(isNew){f.push({l:'חניה',v:'כלולה',n:'תקני',c:'neu'});}
-    else{m*=1.04;f.push({l:'חניה',v:'כלולה',n:'+4%',c:'pos'});}
-  }else{
-    if(isNew){m*=0.97;f.push({l:'חניה',v:'אין (חריג)',n:'-3%',c:'neg'});}
-    else{m*=0.98;f.push({l:'חניה',v:'אין',n:'-2%',c:'neg'});}
-  }
-
-  // מחסן — תוספת קטנה בכל מקרה
-  if(has('storage')){m*=1.015;f.push({l:'מחסן',v:'כלול',n:'+1.5%',c:'pos'});}
-  // מיזוג מרכזי
-  if(has('ac')){m*=1.01;f.push({l:'מיזוג',v:'מרכזי',n:'+1%',c:'pos'});}
-  // מרפסת בבנייה חדשה ללא סימון — קנס קל (מצופה שתהיה)
-  if(isNew&&!has('balcony')){m*=0.98;f.push({l:'מרפסת',v:'חסרה (חריג)',n:'-2%',c:'neg'});}
-
-  const air=parseInt(d.ad)||2;
-  if(air>=3){m*=1.03;f.push({l:'כיוונים',v:`${air}`,n:'+3%',c:'pos'});}
-  else if(air===1){m*=0.97;f.push({l:'כיוונים',v:'1',n:'-3%',c:'neg'});}
-
-  const oM={N:1.01,NW:1.01,NE:1.01,S:1.0,SE:1.0,SW:1.0,E:1.0,W:0.99,unknown:1.0};
-  if(d.ori!=='unknown'){const om=oM[d.ori]||1.0;m*=om;if(om!==1.0)f.push({l:'כיוון',v:d.ori,n:om>1?'+1%':'-1%',c:om>1?'pos':'neg'});}
-
-  if(d.fc==='rear'){m*=0.97;f.push({l:'מיקום',v:'עורפית',n:'-3%',c:'neg'});}
-  else if(d.fc==='corner'){m*=1.02;f.push({l:'מיקום',v:'פינתית',n:'+2%',c:'pos'});}
-
-  const vM={urban:1.0,open:1.05,sea:1.14,blocked:0.95};
-  const vL={urban:'עירוני',open:'פתוח (+5%)',sea:'ים (+14%)',blocked:'חסום (-5%)'};
-  if(d.vw!=='urban'){m*=vM[d.vw];f.push({l:'נוף',v:vL[d.vw],n:vM[d.vw]>1?`+${Math.round((vM[d.vw]-1)*100)}%`:'-5%',c:vM[d.vw]>=1?'pos':'neg'});}
-
-  // Finish level (רמת גימור)
-  const fn=d.fn||'standard';
-  m*=FN_M[fn];
-  f.push({l:'רמת גימור',v:FN_L[fn],n:FN_N[fn],c:FN_C[fn]});
-
-  // Proximity to value-adding locations (קרבה למוקדים) — דו-כיווני
-  const pr=d.pr||[];
-  const prM={train:1.06,highway:1.02,mall:1.03,school:1.03,park:1.02,beach:1.05,hospital:1.01,employment:1.03};
-  const prL={train:'רכבת/רק"ל',highway:'כביש ראשי',mall:'מרכז מסחרי',school:'בי"ס מבוקש',park:'פארק',beach:'קרבה לים',hospital:'בית חולים',employment:'מרכז תעסוקה'};
-  let prMult=1.0;
-  pr.forEach(p=>{if(prM[p])prMult*=prM[p];});
-  if(prMult>1.18)prMult=1.18; // תקרת קרבה
-  if(prMult>1.0){
-    m*=prMult;
-    const names=pr.filter(p=>prM[p]).map(p=>prL[p]).join(', ');
-    f.push({l:'קרבה למוקדים',v:names,n:`+${Math.round((prMult-1)*100)}%`,c:'pos'});
-  }else{
-    // היעדר מוחלט של קרבה למוקדים — מעט מתחת לממוצע
-    m*=0.98;f.push({l:'קרבה למוקדים',v:'מרוחק ממוקדים',n:'-2%',c:'neg'});
-  }
-
-  const tM={apartment:1.0,garden:1.12,penthouse:1.20,cottage:1.28,nachla:1.0};
-  const tm=tM[d.pt]||1.0;
-  if(tm!==1.0){m*=tm;f.push({l:'סוג נכס',v:$('pt').options[$('pt').selectedIndex].text,n:`+${Math.round((tm-1)*100)}%`,c:'pos'});}
-
-  // Pinui-binui (החל על המכפיל לפני חישוב הסכום הסופי)
-  const pb=d.pb||'none';
-  if(pb!=='none'){m*=PB_M[pb];f.push({l:'פינוי-בינוי',v:PB_L[pb],n:PB_N[pb],c:PB_C[pb]});}
-
-  // תקרת ניפוח: הצטברות מקדמים חיוביים מוגבלת ל-x1.55 (מעבר לפינוי-בינוי)
-  // מונע מצב שבו חדש+גימור+מרפסת+נוף+קומה מצטברים למחיר לא ריאלי
-  const pbFactor=PB_M[pb];
-  const mNoPb=m/pbFactor;
-  if(mNoPb>1.55){m=1.55*pbFactor;f.push({l:'תקרת התאמות',v:'הוחל גבול',n:'מניעת ניפוח',c:'neu'});}
-
-  const effPrice=base*m; // מחיר אפקטיבי למ"ר עיקרי אחרי כל המקדמים
-
-  // ===== בית קרקע / נחלה =====
-  if(isGround(d.pt)){
-    const land=parseFloat($('nl').value)||0;
-    const built=parseFloat($('nbu').value)||d.sz;
-    const garden=Math.max(land-built,0);
-    const builtVal=built*effPrice;
-    let landVal;
-    if(d.pt==='nachla'){
-      const nt=$('nt').value;
-      const lP={moshav:300000,kibbutz:250000,regional:180000,agri_suburb:400000};
-      // נחלה: מחיר לדונם. אם הוזן מ"ר נמיר; אם המספר קטן (דונם) נשאיר
-      const dunam=land>50?land/1000:land;
-      landVal=dunam*(lP[nt]||250000);
-      f.push({l:'קרקע',v:`${dunam.toFixed(1)} דונם`,n:'שווי נפרד',c:'pos'});
-      return{total:builtVal+landVal,base,mult:m,factors:f,isGround:true,landVal,builtVal,garden:0,gardenVal:0};
+    const $ = id => document.getElementById(id);
+    function ss(n) {
+        document.querySelectorAll('.sc').forEach(s => s.classList.remove('a'));
+        $('s' + n).classList.add('a');
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
     }
-    // בית פרטי/קוטג': גינה מתומחרת כ-30% משווי מ"ר עיקרי
-    const gardenVal=garden*effPrice*0.30;
-    if(garden>0)f.push({l:'גינה/חצר',v:`${garden.toLocaleString('he-IL')} מ"ר`,n:'+30%/מ"ר',c:'pos'});
-    return{total:builtVal+gardenVal,base,mult:m,factors:f,isGround:true,builtVal,gardenVal,garden,land,built};
-  }
 
-  // ===== דירה רגילה =====
-  let total=d.sz*effPrice;
-  let balcVal=0;
-  if(d.ex.includes('balcony')){
-    const bsz=parseFloat($('balsz').value)||0;
-    if(bsz>0){
-      // עד 12 מ"ר: 50% משווי מ"ר עיקרי; מעבר: 40% (מקדם שמאי מקובל)
-      const coef=bsz<=12?0.50:0.40;
-      balcVal=bsz*effPrice*coef;
-      total+=balcVal;
-      f.push({l:'מרפסת',v:`${bsz} מ"ר`,n:`+${Math.round(coef*100)}%/מ"ר`,c:'pos'});
-    }else{
-      f.push({l:'מרפסת',v:'יש',n:'+3%',c:'pos'});
-      total*=1.03;
-    }
-  }
-  return{total,base,mult:m,factors:f,isGround:false,balcVal};
-}
-
-$('vf').addEventListener('submit',async function(e){
-  e.preventDefault();
-  document.querySelectorAll('.err').forEach(el=>el.classList.remove('s'));
-  if(!validate()){window.scrollTo({top:0,behavior:'smooth'});return;}
-
-  const ck=$('cs').value,nv=$('ns').value;
-  const ic=nv.includes('הקלד')||nv.includes('אחרת');
-  const nh=ic?($('cn').value||'לא צוין'):nv;
-  const ex=Array.from(document.querySelectorAll('input[name="ex"]:checked')).map(x=>x.value);
-  const pr=Array.from(document.querySelectorAll('input[name="pr"]:checked')).map(x=>x.value);
-
-  const d={
-    ck,pt:$('pt').value,nh,sz:parseFloat($('sz').value),rm:$('rm').value,
-    fl:$('fl').value||'0',tf:$('tf').value||'1',
-    by:document.querySelector('input[name="by"]:checked')?.value||'old',
-    cd:document.querySelector('input[name="cd"]:checked').value,
-    fn:document.querySelector('input[name="fn"]:checked')?.value||'standard',
-    pb:document.querySelector('input[name="pb"]:checked')?.value||'none',
-    fc:document.querySelector('input[name="fc"]:checked').value,
-    ad:document.querySelector('input[name="ad"]:checked').value,
-    vw:document.querySelector('input[name="vw"]:checked').value,
-    ori:$('ori').value,ex,pr,
-    nm:$('nm').value,ph:$('ph').value
-  };
-
-  ss('l');
-  const ls=[$('l1'),$('l2'),$('l3'),$('l4')];
-  ls.forEach(s=>{s.classList.remove('ac','dn');s.textContent='⬜'+s.textContent.slice(1);});
-  for(let i=0;i<ls.length;i++){
-    await new Promise(r=>setTimeout(r,380));
-    if(i>0){ls[i-1].classList.add('dn');ls[i-1].textContent='✅'+ls[i-1].textContent.slice(1);}
-    ls[i].classList.add('ac');
-  }
-  await new Promise(r=>setTimeout(r,380));
-  ls[3].classList.add('dn');ls[3].textContent='✅'+ls[3].textContent.slice(1);
-
-  const calc=calcVal(d);
-  const low=Math.round((calc.total*.94)/10000)*10000;
-  const high=Math.round((calc.total*1.06)/10000)*10000;
-  const fmt=n=>new Intl.NumberFormat('he-IL',{style:'currency',currency:'ILS',maximumFractionDigits:0}).format(n);
-  const cl=DB[ck]?.lbl||ck;
-
-  $('rsb').textContent=`${cl} • ${nh} • ${d.sz} מ"ר • ${d.rm||''} חד' • ${BY_L[d.by]}`;
-  if(calc.isGround){
-    if(d.pt==='nachla'){
-      $('rr').innerHTML=`${fmt(low)} – ${fmt(high)}<br><span style="font-size:12px;font-weight:500;color:#475569">בנוי: ${fmt(Math.round(calc.builtVal))} | קרקע: ${fmt(Math.round(calc.landVal))}</span>`;
-    }else{
-      $('rr').innerHTML=`${fmt(low)} – ${fmt(high)}<br><span style="font-size:12px;font-weight:500;color:#475569">בנוי ${calc.built} מ"ר: ${fmt(Math.round(calc.builtVal))} | גינה ${calc.garden} מ"ר: ${fmt(Math.round(calc.gardenVal))}</span>`;
-    }
-  }else{
-    $('rr').textContent=`${fmt(low)} – ${fmt(high)}`;
-  }
-  const ep=Math.round(calc.base*calc.mult);
-  $('rpm').innerHTML=`בסיס שוק: <strong>${calc.base.toLocaleString('he-IL')} ₪/מ"ר</strong> (${BY_L[d.by]}) → לאחר תיקונים: <strong>${ep.toLocaleString('he-IL')} ₪/מ"ר</strong>`;
-
-  const rf=$('rf');rf.innerHTML='';
-  calc.factors.forEach(f=>{
-    const c=document.createElement('div');c.className='fc '+f.c;
-    c.innerHTML=`<strong>${f.l}</strong>${f.v} <span style="font-weight:700">${f.n}</span>`;
-    rf.appendChild(c);
-  });
-
-  const cT={brandnew:'דירה חדשה מקבלן',new:'הנכס משופץ כחדש',good:'הנכס במצב טוב',partial:'שיפוץ חלקי נדרש',unrenovated:'הנכס לא משופץ',renovation:'שיפוץ מלא נדרש'};
-  const exT=d.ex.length?d.ex.join(', '):'ללא תוספות';
-  const pbT=d.pb==='signed'?' <strong>הנכס חתום בהסכם פינוי-בינוי</strong> — תוספת ערך משמעותית (תלוי בהתקדמות הפרויקט בפועל).':d.pb==='candidate'?' הנכס מועמד לפינוי-בינוי (לא חתום) — השפעה מזערית על השווי עד לחתימה.':'';
-  $('rn').innerHTML=`<strong>📊 ניתוח:</strong> ב<strong>${nh}</strong>, ${cl} — בסיס שוק <strong>${calc.base.toLocaleString('he-IL')} ₪/מ"ר</strong> לבנייה ${BY_L[d.by]}. ${cT[d.cd]}, ${FN_L[d.fn]}. תוספות: ${exT}. קומה <strong>${d.fl} מתוך ${d.tf}</strong>, ${d.fc==='front'?'חזית':d.fc==='rear'?'עורפית':'פינתית'}.${pbT}`;
-
-  ss('r');
-  try{
-    await fetch('https://script.google.com/macros/s/AKfycbxZmTaH6JovDRTIqhtaUb_iPOrLHctOolyNER5fl5uNRB4E1O4hM2Ag5P_OQUNAdo3Tcw/exec',{
-      method:'POST',mode:'no-cors',
-      headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body:new URLSearchParams({
-        timestamp:new Date().toISOString(),full_name:d.nm,phone:d.ph,
-        email:'מחשבון שווי',inquiry_reason:'הערכת שווי נכס',
-        message:`${cl}/${nh}/${d.sz}מ"ר/${d.rm}חד'/בנייה:${d.by}/קומה:${d.fl}/${d.tf}/מצב:${d.cd}/גימור:${d.fn}/פינוי-בינוי:${d.pb}/תוספות:${d.ex.join(',')}/קרבה:${d.pr.join(',')}/טווח:${fmt(low)}-${fmt(high)}`
-      }).toString()
+    $('cs').addEventListener('change', function() {
+        const k = this.value,
+            ns = $('ns');
+        $('cnb').style.display = 'none';
+        $('fab').style.display = 'none';
+        $('ce').classList.remove('s');
+        ns.innerHTML = '<option value="">-- בחר שכונה --</option>';
+        ns.disabled = true;
+        if (!k)
+            return;
+        if (k === 'other_city') {
+            $('fab').style.display = 'block';
+            ns.innerHTML = '<option value="free_city">כתובת מלאה בשדה למטה</option>';
+            ns.disabled = false;
+            return;
+        }
+        if (!DB[k])
+            return;
+        ns.disabled = false;
+        Object.keys(DB[k].n).forEach(n => {
+            const o = document.createElement('option');
+            o.value = n;
+            o.textContent = n;
+            ns.appendChild(o);
+        });
     });
-  }catch(e){}
-});
 
-function restart(){
-  $('vf').reset();
-  $('ns').innerHTML='<option value="">בחר עיר קודם...</option>';
-  $('ns').disabled=true;
-  ['cnb','fab','cdb','nb','balb'].forEach(id=>$(id).style.display='none');
-  $('gardenout').textContent='';
-  document.querySelectorAll('.err').forEach(el=>el.classList.remove('s'));
-  ss('f');
-}
-</script>
+    $('ns').addEventListener('change', function() {
+        $('ne').classList.remove('s');
+        $('cnb').style.display = (this.value.includes('הקלד') || this.value.includes('אחרת')) ? 'block' : 'none';
+    });
+    document.querySelectorAll('input[name="cd"]').forEach(r => r.addEventListener('change', function() {
+        $('cdb').style.display = 'block';
+        $('cdl').textContent = (this.value === 'new' || this.value === 'good' || this.value === 'brandnew') ? 'מה כולל השיפוץ? (אופציונלי)' : 'מה צריך שיפוץ?';
+    }));
+    function isGround(pt) {
+        return pt === 'cottage' || pt === 'nachla';
+    }
+    function updateGroundGarden() {
+        const land = parseFloat($('nl').value) || 0,
+            built = parseFloat($('nbu').value) || 0;
+        const out = $('gardenout');
+        if (land > 0 && built > 0) {
+            const g = land - built;
+            if (g >= 0) {
+                out.textContent = `🌳 שטח גינה/חצר מחושב: ${g.toLocaleString('he-IL')} מ"ר (מגרש ${land.toLocaleString('he-IL')} − בנוי ${built.toLocaleString('he-IL')})`;
+                out.style.color = '#047857';
+            }
+            else {
+                out.textContent = `⚠️ השטח הבנוי גדול מהמגרש — בדוק את הנתונים`;
+                out.style.color = '#e11d48';
+            }
+        } else {
+            out.textContent = '';
+        }
+    }
+    $('pt').addEventListener('change', function() {
+        const g = isGround(this.value);
+        $('nb').style.display = g ? 'block' : 'none';
+        $('nblbl').textContent = this.value === 'nachla' ? '🌾 פרטי נחלה / מגרש' : '🏡 פרטי בית קרקע';
+        $('nts').style.display = this.value === 'nachla' ? 'block' : 'none';
+        if (g)
+            updateGroundGarden();
+    });
+    $('nl').addEventListener('input', updateGroundGarden);
+    $('nbu').addEventListener('input', updateGroundGarden);
+
+    document.querySelector('input[name="ex"][value="balcony"]').addEventListener('change', function() {
+        $('balb').style.display = this.checked ? 'block' : 'none';
+    });
+
+    function validate() {
+        let ok = true;
+        if (!$('cs').value) {
+            $('ce').classList.add('s');
+            ok = false;
+        }
+        if (!$('ns').value) {
+            $('ne').classList.add('s');
+            ok = false;
+        }
+        const sz = parseFloat($('sz').value);
+        if (!sz || sz < 20 || sz > 2000) {
+            $('sze').classList.add('s');
+            ok = false;
+        }
+        const pt = $('pt').value;
+        if (isGround(pt)) {
+            const land = parseFloat($('nl').value),
+                built = parseFloat($('nbu').value);
+            if (!land || !built) {
+                alert('עבור בית קרקע / נחלה — יש להזין שטח מגרש ושטח בנוי');
+                ok = false;
+            }
+        }
+        const balOn = document.querySelector('input[name="ex"][value="balcony"]').checked;
+        if (balOn && !(parseFloat($('balsz').value) > 0)) {
+            alert('סימנת מרפסת — יש להזין את שטח המרפסת במ"ר');
+            ok = false;
+        }
+        if (!$('nm').value.trim()) {
+            $('nme').classList.add('s');
+            ok = false;
+        }
+        if (!$('ph').value.trim()) {
+            $('phe').classList.add('s');
+            ok = false;
+        }
+        return ok;
+    }
+
+    function calcVal(d) {
+        const db = DB[d.ck];
+        let base = db ? (d.nh && db.n[d.nh] ? db.n[d.nh] : db.def) : 15000;
+        let m = 1.0;
+        const f = [];
+
+        const by = d.by || 'old';
+        m *= BY_M[by];
+        f.push({
+            l: 'גיל הבניין',
+            v: BY_L[by],
+            n: BY_N[by],
+            c: BY_C[by]
+        });
+
+        const cM = {
+            brandnew: 1.05,
+            new: 1.00,
+            good: 0.93,
+            partial: 0.85,
+            unrenovated: 0.82,
+            renovation: 0.73
+        };
+        const cN = {
+            brandnew: '+5%',
+            new: '–',
+            good: '-7%',
+            partial: '-15%',
+            unrenovated: '-18%',
+            renovation: '-27%'
+        };
+        const cL = {
+            brandnew: 'חדשה מקבלן',
+            new: 'משופץ כחדש',
+            good: 'מצב טוב',
+            partial: 'שיפוץ חלקי',
+            unrenovated: 'לא משופץ',
+            renovation: 'שיפוץ מלא'
+        };
+        const cC = {
+            brandnew: 'pos',
+            new: 'pos',
+            good: 'neu',
+            partial: 'neg',
+            unrenovated: 'neg',
+            renovation: 'neg'
+        };
+        m *= cM[d.cd];
+        f.push({
+            l: 'מצב',
+            v: cL[d.cd],
+            n: cN[d.cd],
+            c: cC[d.cd]
+        });
+
+        if (!isGround(d.pt)) {
+            const sz = d.sz || 90;
+            let szM = 1.0;
+            if (sz < 55)
+                szM = 1.10;
+            else if (sz < 70)
+                szM = 1.06;
+            else if (sz < 85)
+                szM = 1.03;
+            else if (sz <= 100)
+                szM = 1.0;
+            else if (sz <= 130)
+                szM = 0.97;
+            else if (sz <= 170)
+                szM = 0.94;
+            else
+                szM = 0.91;
+            if (szM !== 1.0) {
+                m *= szM;
+                f.push({
+                    l: 'גודל דירה',
+                    v: `${sz} מ"ר`,
+                    n: szM > 1 ? `+${Math.round((szM - 1) * 100)}%/מ"ר` : `${Math.round((szM - 1) * 100)}%/מ"ר`,
+                    c: szM > 1 ? 'pos' : 'neg'
+                });
+            }
+        }
+
+        const fl = parseInt(d.fl) || 0,
+            tot = parseInt(d.tf) || 1,
+            ratio = fl / Math.max(tot, 1);
+        let fm = 1.0;
+        if (fl === 0) {
+            fm = d.pt === 'garden' ? 1.05 : 0.93;
+            f.push({
+                l: 'קומה',
+                v: `קרקע מתוך ${tot}`,
+                n: d.pt === 'garden' ? '+5%' : '-7%',
+                c: d.pt === 'garden' ? 'pos' : 'neg'
+            });
+        }
+        else if (fl === 1) {
+            fm = 0.96;
+            f.push({
+                l: 'קומה',
+                v: `${fl}/${tot}`,
+                n: '-4%',
+                c: 'neg'
+            });
+        }
+        else if (ratio > 0.85) {
+            fm = d.pt === 'penthouse' ? 1.25 : 1.08;
+            f.push({
+                l: 'קומה',
+                v: `${fl}/${tot} ⬆️`,
+                n: d.pt === 'penthouse' ? '+25%' : '+8%',
+                c: 'pos'
+            });
+        }
+        else if (fl >= 4) {
+            fm = 1.04 + Math.min(ratio * 0.04, 0.06);
+            f.push({
+                l: 'קומה',
+                v: `${fl}/${tot}`,
+                n: `+${Math.round((fm - 1) * 100)}%`,
+                c: 'pos'
+            });
+        }
+        else {
+            f.push({
+                l: 'קומה',
+                v: `${fl}/${tot}`,
+                n: 'ניטרלי',
+                c: 'neu'
+            });
+        }
+        m *= fm;
+
+        const isNew = (d.by === 'new' || d.by === 'mid');
+        const has = k => d.ex.includes(k);
+
+        const hE = has('elevator');
+        if (fl >= 4 && !hE) {
+            m *= 0.92;
+            f.push({
+                l: 'מעלית',
+                v: 'אין (קומה גבוהה)',
+                n: '-8%',
+                c: 'neg'
+            });
+        }
+        else if (hE && fl >= 4) {
+            f.push({
+                l: 'מעלית',
+                v: 'יש',
+                n: 'ניטרלי',
+                c: 'neu'
+            });
+        }
+
+        if (has('mamad')) {
+            if (isNew) {
+                f.push({
+                    l: 'ממ"ד',
+                    v: 'יש',
+                    n: 'תקני',
+                    c: 'neu'
+                });
+            }
+            else {
+                m *= 1.05;
+                f.push({
+                    l: 'ממ"ד',
+                    v: 'יש (בבניין ישן)',
+                    n: '+5%',
+                    c: 'pos'
+                });
+            }
+        } else {
+            if (isNew) {
+                m *= 0.98;
+                f.push({
+                    l: 'ממ"ד',
+                    v: 'חסר (חריג לבנייה חדשה)',
+                    n: '-2%',
+                    c: 'neg'
+                });
+            }
+        }
+
+        if (has('parking')) {
+            if (isNew) {
+                f.push({
+                    l: 'חניה',
+                    v: 'כלולה',
+                    n: 'תקני',
+                    c: 'neu'
+                });
+            }
+            else {
+                m *= 1.04;
+                f.push({
+                    l: 'חניה',
+                    v: 'כלולה',
+                    n: '+4%',
+                    c: 'pos'
+                });
+            }
+        } else {
+            if (isNew) {
+                m *= 0.97;
+                f.push({
+                    l: 'חניה',
+                    v: 'אין (חריג)',
+                    n: '-3%',
+                    c: 'neg'
+                });
+            }
+            else {
+                m *= 0.98;
+                f.push({
+                    l: 'חניה',
+                    v: 'אין',
+                    n: '-2%',
+                    c: 'neg'
+                });
+            }
+        }
+
+        if (has('storage')) {
+            m *= 1.015;
+            f.push({
+                l: 'מחסן',
+                v: 'כלול',
+                n: '+1.5%',
+                c: 'pos'
+            });
+        }
+        if (has('ac')) {
+            m *= 1.01;
+            f.push({
+                l: 'מיזוג',
+                v: 'מרכזי',
+                n: '+1%',
+                c: 'pos'
+            });
+        }
+        if (isNew && !has('balcony')) {
+            m *= 0.98;
+            f.push({
+                l: 'מרפסת',
+                v: 'חסרה (חריג)',
+                n: '-2%',
+                c: 'neg'
+            });
+        }
+
+        const air = parseInt(d.ad) || 2;
+        if (air >= 3) {
+            m *= 1.03;
+            f.push({
+                l: 'כיוונים',
+                v: `${air}`,
+                n: '+3%',
+                c: 'pos'
+            });
+        }
+        else if (air === 1) {
+            m *= 0.97;
+            f.push({
+                l: 'כיוונים',
+                v: '1',
+                n: '-3%',
+                c: 'neg'
+            });
+        }
+
+        const oM = {
+            N: 1.01,
+            NW: 1.01,
+            NE: 1.01,
+            S: 1.0,
+            SE: 1.0,
+            SW: 1.0,
+            E: 1.0,
+            W: 0.99,
+            unknown: 1.0
+        };
+        if (d.ori !== 'unknown') {
+            const om = oM[d.ori] || 1.0;
+            m *= om;
+            if (om !== 1.0)
+                f.push({
+                    l: 'כיוון',
+                    v: d.ori,
+                    n: om > 1 ? '+1%' : '-1%',
+                    c: om > 1 ? 'pos' : 'neg'
+                });
+        }
+
+        if (d.fc === 'rear') {
+            m *= 0.97;
+            f.push({
+                l: 'מיקום',
+                v: 'עורפית',
+                n: '-3%',
+                c: 'neg'
+            });
+        }
+        else if (d.fc === 'corner') {
+            m *= 1.02;
+            f.push({
+                l: 'מיקום',
+                v: 'פינתית',
+                n: '+2%',
+                c: 'pos'
+            });
+        }
+
+        const vM = {
+            urban: 1.0,
+            open: 1.05,
+            sea: 1.14,
+            blocked: 0.95
+        };
+        const vL = {
+            urban: 'עירוני',
+            open: 'פתוח (+5%)',
+            sea: 'ים (+14%)',
+            blocked: 'חסום (-5%)'
+        };
+        if (d.vw !== 'urban') {
+            m *= vM[d.vw];
+            f.push({
+                l: 'נוף',
+                v: vL[d.vw],
+                n: vM[d.vw] > 1 ? `+${Math.round((vM[d.vw] - 1) * 100)}%` : '-5%',
+                c: vM[d.vw] >= 1 ? 'pos' : 'neg'
+            });
+        }
+
+        const fn = d.fn || 'standard';
+        m *= FN_M[fn];
+        f.push({
+            l: 'רמת גימור',
+            v: FN_L[fn],
+            n: FN_N[fn],
+            c: FN_C[fn]
+        });
+
+        const pr = d.pr || [];
+        const prM = {
+            train: 1.06,
+            highway: 1.02,
+            mall: 1.03,
+            school: 1.03,
+            park: 1.02,
+            beach: 1.05,
+            hospital: 1.01,
+            employment: 1.03
+        };
+        const prL = {
+            train: 'רכבת/רק"ל',
+            highway: 'כביש ראשי',
+            mall: 'מרכז מסחרי',
+            school: 'בי"ס מבוקש',
+            park: 'פארק',
+            beach: 'קרבה לים',
+            hospital: 'בית חולים',
+            employment: 'מרכז תעסוקה'
+        };
+        let prMult = 1.0;
+        pr.forEach(p => {
+            if (prM[p])
+                prMult *= prM[p];
+        });
+        if (prMult > 1.18)
+            prMult = 1.18;
+        if (prMult > 1.0) {
+            m *= prMult;
+            const names = pr.filter(p => prM[p]).map(p => prL[p]).join(', ');
+            f.push({
+                l: 'קרבה למוקדים',
+                v: names,
+                n: `+${Math.round((prMult - 1) * 100)}%`,
+                c: 'pos'
+            });
+        } else {
+            m *= 0.98;
+            f.push({
+                l: 'קרבה למוקדים',
+                v: 'מרוחק ממוקדים',
+                n: '-2%',
+                c: 'neg'
+            });
+        }
+
+        const tM = {
+            apartment: 1.0,
+            garden: 1.12,
+            penthouse: 1.20,
+            cottage: 1.28,
+            nachla: 1.0
+        };
+        const tm = tM[d.pt] || 1.0;
+        if (tm !== 1.0) {
+            m *= tm;
+            f.push({
+                l: 'סוג נכס',
+                v: $('pt').options[$('pt').selectedIndex].text,
+                n: `+${Math.round((tm - 1) * 100)}%`,
+                c: 'pos'
+            });
+        }
+
+        const pb = d.pb || 'none';
+        if (pb !== 'none') {
+            m *= PB_M[pb];
+            f.push({
+                l: 'פינוי-בינוי',
+                v: PB_L[pb],
+                n: PB_N[pb],
+                c: PB_C[pb]
+            });
+        }
+
+        const pbFactor = PB_M[pb];
+        const mNoPb = m / pbFactor;
+        if (mNoPb > 1.55) {
+            m = 1.55 * pbFactor;
+            f.push({
+                l: 'תקרת התאמות',
+                v: 'הוחל גבול',
+                n: 'מניעת ניפוח',
+                c: 'neu'
+            });
+        }
+
+        const effPrice = base * m;
+
+        if (isGround(d.pt)) {
+            const land = parseFloat($('nl').value) || 0;
+            const built = parseFloat($('nbu').value) || d.sz;
+            const garden = Math.max(land - built, 0);
+            const builtVal = built * effPrice;
+            let landVal;
+            if (d.pt === 'nachla') {
+                const nt = $('nt').value;
+                const lP = {
+                    moshav: 300000,
+                    kibbutz: 250000,
+                    regional: 180000,
+                    agri_suburb: 400000
+                };
+                const dunam = land > 50 ? land / 1000 : land;
+                landVal = dunam * (lP[nt] || 250000);
+                f.push({
+                    l: 'קרקע',
+                    v: `${dunam.toFixed(1)} דונם`,
+                    n: 'שווי נפרד',
+                    c: 'pos'
+                });
+                return {
+                    total: builtVal + landVal,
+                    base,
+                    mult: m,
+                    factors: f,
+                    isGround: true,
+                    landVal,
+                    builtVal,
+                    garden: 0,
+                    gardenVal: 0
+                };
+            }
+            const gardenVal = garden * effPrice * 0.30;
+            if (garden > 0)
+                f.push({
+                    l: 'גינה/חצר',
+                    v: `${garden.toLocaleString('he-IL')} מ"ר`,
+                    n: '+30%/מ"ר',
+                    c: 'pos'
+                });
+            return {
+                total: builtVal + gardenVal,
+                base,
+                mult: m,
+                factors: f,
+                isGround: true,
+                builtVal,
+                gardenVal,
+                garden,
+                land,
+                built
+            };
+        }
+
+        let total = d.sz * effPrice;
+        let balcVal = 0;
+        if (d.ex.includes('balcony')) {
+            const bsz = parseFloat($('balsz').value) || 0;
+            if (bsz > 0) {
+                const coef = bsz <= 12 ? 0.50 : 0.40;
+                balcVal = bsz * effPrice * coef;
+                total += balcVal;
+                f.push({
+                    l: 'מרפסת',
+                    v: `${bsz} מ"ר`,
+                    n: `+${Math.round(coef * 100)}%/מ"ר`,
+                    c: 'pos'
+                });
+            } else {
+                f.push({
+                    l: 'מרפסת',
+                    v: 'יש',
+                    n: '+3%',
+                    c: 'pos'
+                });
+                total *= 1.03;
+            }
+        }
+        return {
+            total,
+            base,
+            mult: m,
+            factors: f,
+            isGround: false,
+            balcVal
+        };
+    }
+
+    $('vf').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.err').forEach(el => el.classList.remove('s'));
+        if (!validate()) {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            return;
+        }
+
+        const ck = $('cs').value,
+            nv = $('ns').value;
+        const ic = nv.includes('הקלד') || nv.includes('אחרת');
+        const nh = ic ? ($('cn').value || 'לא צוין') : nv;
+        const ex = Array.from(document.querySelectorAll('input[name="ex"]:checked')).map(x => x.value);
+        const pr = Array.from(document.querySelectorAll('input[name="pr"]:checked')).map(x => x.value);
+
+        const d = {
+            ck,
+            pt: $('pt').value,
+            nh,
+            sz: parseFloat($('sz').value),
+            rm: $('rm').value,
+            fl: $('fl').value || '0',
+            tf: $('tf').value || '1',
+            by: document.querySelector('input[name="by"]:checked')?.value || 'old',
+            cd: document.querySelector('input[name="cd"]:checked').value,
+            fn: document.querySelector('input[name="fn"]:checked')?.value || 'standard',
+            pb: document.querySelector('input[name="pb"]:checked')?.value || 'none',
+            fc: document.querySelector('input[name="fc"]:checked').value,
+            ad: document.querySelector('input[name="ad"]:checked').value,
+            vw: document.querySelector('input[name="vw"]:checked').value,
+            ori: $('ori').value,
+            ex,
+            pr,
+            nm: $('nm').value,
+            ph: $('ph').value
+        };
+
+        ss('l');
+        const ls = [$('l1'), $('l2'), $('l3'), $('l4')];
+        ls.forEach(s => {
+            s.classList.remove('ac', 'dn');
+            s.textContent = '⬜' + s.textContent.slice(1);
+        });
+        for (let i = 0; i < ls.length; i++) {
+            await new Promise(r => setTimeout(r, 380));
+            if (i > 0) {
+                ls[i - 1].classList.add('dn');
+                ls[i - 1].textContent = '✅' + ls[i - 1].textContent.slice(1);
+            }
+            ls[i].classList.add('ac');
+        }
+        await new Promise(r => setTimeout(r, 380));
+        ls[3].classList.add('dn');
+        ls[3].textContent = '✅' + ls[3].textContent.slice(1);
+
+        const calc = calcVal(d);
+        const low = Math.round((calc.total * .94) / 10000) * 10000;
+        const high = Math.round((calc.total * 1.06) / 10000) * 10000;
+        const fmt = n => new Intl.NumberFormat('he-IL', {
+            style: 'currency',
+            currency: 'ILS',
+            maximumFractionDigits: 0
+        }).format(n);
+        const cl = DB[ck]?.lbl || ck;
+
+        $('rsb').textContent = `${cl} • ${nh} • ${d.sz} מ"ר • ${d.rm || ''} חד' • ${BY_L[d.by]}`;
+        if (calc.isGround) {
+            if (d.pt === 'nachla') {
+                $('rr').innerHTML = `${fmt(low)} – ${fmt(high)}<br><span style="font-size:12px;font-weight:500;color:#475569">בנוי: ${fmt(Math.round(calc.builtVal))} | קרקע: ${fmt(Math.round(calc.landVal))}</span>`;
+            } else {
+                $('rr').innerHTML = `${fmt(low)} – ${fmt(high)}<br><span style="font-size:12px;font-weight:500;color:#475569">בנוי ${calc.built} מ"ר: ${fmt(Math.round(calc.builtVal))} | גינה ${calc.garden} מ"ר: ${fmt(Math.round(calc.gardenVal))}</span>`;
+            }
+        } else {
+            $('rr').textContent = `${fmt(low)} – ${fmt(high)}`;
+        }
+        const ep = Math.round(calc.base * calc.mult);
+        $('rpm').innerHTML = `בסיס שוק: <strong>${calc.base.toLocaleString('he-IL')} ₪/מ"ר</strong> (${BY_L[d.by]}) → לאחר תיקונים: <strong>${ep.toLocaleString('he-IL')} ₪/מ"ר</strong>`;
+
+        const rf = $('rf');
+        rf.innerHTML = '';
+        calc.factors.forEach(f => {
+            const c = document.createElement('div');
+            c.className = 'fc ' + f.c;
+            c.innerHTML = `<strong>${f.l}</strong>${f.v} <span style="font-weight:700">${f.n}</span>`;
+            rf.appendChild(c);
+        });
+
+        const cT = {
+            brandnew: 'דירה חדשה מקבלן',
+            new: 'הנכס משופץ כחדש',
+            good: 'הנכס במצב טוב',
+            partial: 'שיפוץ חלקי נדרש',
+            unrenovated: 'הנכס לא משופץ',
+            renovation: 'שיפוץ מלא נדרש'
+        };
+        const exT = d.ex.length ? d.ex.join(', ') : 'ללא תוספות';
+        const pbT = d.pb === 'signed' ? ' <strong>הנכס חתום בהסכם פינוי-בינוי</strong> — תוספת ערך משמעותית (תלוי בהתקדמות הפרויקט בפועל).' : d.pb === 'candidate' ? ' הנכס מועמד לפינוי-בינוי (לא חתום) — השפעה מזערית על השווי עד לחתימה.' : '';
+        $('rn').innerHTML = `<strong>📊 ניתוח:</strong> ב<strong>${nh}</strong>, ${cl} — בסיס שוק <strong>${calc.base.toLocaleString('he-IL')} ₪/מ"ר</strong> לבנייה ${BY_L[d.by]}. ${cT[d.cd]}, ${FN_L[d.fn]}. תוספות: ${exT}. קומה <strong>${d.fl} מתוך ${d.tf}</strong>, ${d.fc === 'front' ? 'חזית' : d.fc === 'rear' ? 'עורפית' : 'פינתית'}.${pbT}`;
+
+        ss('r');
+        try {
+            await fetch('https://script.google.com/macros/s/AKfycbxZmTaH6JovDRTIqhtaUb_iPOrLHctOolyNER5fl5uNRB4E1O4hM2Ag5P_OQUNAdo3Tcw/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    timestamp: new Date().toISOString(),
+                    full_name: d.nm,
+                    phone: d.ph,
+                    email: 'מחשבון שווי',
+                    inquiry_reason: 'הערכת שווי נכס',
+                    message: `${cl}/${nh}/${d.sz}מ"ר/${d.rm}חד'/בנייה:${d.by}/קומה:${d.fl}/${d.tf}/מצב:${d.cd}/גימור:${d.fn}/פינוי-בינוי:${d.pb}/תוספות:${d.ex.join(',')}/קרבה:${d.pr.join(',')}/טווח:${fmt(low)}-${fmt(high)}`
+                }).toString()
+            });
+        } catch (e) {}
+    });
+
+    function restart() {
+        $('vf').reset();
+        $('ns').innerHTML = '<option value="">בחר עיר קודם...</option>';
+        $('ns').disabled = true;
+        ['cnb', 'fab', 'cdb', 'nb', 'balb'].forEach(id => $(id).style.display = 'none');
+        $('gardenout').textContent = '';
+        document.querySelectorAll('.err').forEach(el => el.classList.remove('s'));
+        ss('f');
+    }
+    </script>
 </body>
 </html>

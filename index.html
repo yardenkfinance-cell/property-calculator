@@ -528,6 +528,31 @@
     .err.s {
         display: block
     }
+
+    .back-home {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 9999;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: linear-gradient(135deg, var(--bd), var(--b));
+        color: #fff;
+        padding: 10px 18px;
+        border-radius: 30px;
+        font-family: 'Heebo', sans-serif;
+        font-weight: 800;
+        font-size: 13px;
+        text-decoration: none;
+        box-shadow: 0 4px 16px rgba(30, 58, 138, .35);
+        transition: transform .2s, box-shadow .2s;
+    }
+
+    .back-home:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(30, 58, 138, .45);
+    }
     </style>
 </head>
 <body>
@@ -2497,15 +2522,15 @@
         });
 
         const pr = d.pr || [];
-        const prM = {
-            train: 1.06,
-            highway: 1.02,
-            mall: 1.03,
-            school: 1.03,
-            park: 1.02,
-            beach: 1.05,
-            hospital: 1.01,
-            employment: 1.03
+        const prPct = {
+            train: 3,
+            highway: 1,
+            mall: 1.5,
+            school: 1.5,
+            park: 1,
+            beach: 3,
+            hospital: 0.5,
+            employment: 1.5
         };
         const prL = {
             train: 'רכבת/רק"ל',
@@ -2517,20 +2542,20 @@
             hospital: 'בית חולים',
             employment: 'מרכז תעסוקה'
         };
-        let prMult = 1.0;
+        let prSum = 0;
         pr.forEach(p => {
-            if (prM[p])
-                prMult *= prM[p];
+            if (prPct[p])
+                prSum += prPct[p];
         });
-        if (prMult > 1.18)
-            prMult = 1.18;
-        if (prMult > 1.0) {
-            m *= prMult;
-            const names = pr.filter(p => prM[p]).map(p => prL[p]).join(', ');
+        if (prSum > 8)
+            prSum = 8;
+        if (prSum > 0) {
+            m *= (1 + prSum / 100);
+            const names = pr.filter(p => prPct[p]).map(p => prL[p]).join(', ');
             f.push({
                 l: 'קרבה למוקדים',
                 v: names,
-                n: `+${Math.round((prMult - 1) * 100)}%`,
+                n: `+${Math.round(prSum)}%`,
                 c: 'pos'
             });
         } else {
@@ -2808,5 +2833,6 @@
         ss('f');
     }
     </script>
+    <a href="https://yardenkoubi.com" class="back-home">🏠 חזרה לאתר הראשי</a>
 </body>
 </html>

@@ -1221,6 +1221,7 @@
             n: {
                 "עיר ימים": 34000,
                 "פולג / אגמים": 30000,
+                "כוכב הצפון": 20000,
                 "קריית השרון": 26000,
                 "צפון נתניה / שיקמים": 22000,
                 "מרכז העיר": 21000,
@@ -1985,7 +1986,7 @@
     };
 
     const BY_M = {
-        new: 1.13,
+        new: 1.17,
         mid: 1.05,
         old: 1.00,
         veryold: 0.91
@@ -1997,7 +1998,7 @@
         veryold: 'בנייה לפני 1970'
     };
     const BY_N = {
-        new: '+13%',
+        new: '+17%',
         mid: '+5%',
         old: 'בסיס',
         veryold: '-9%'
@@ -2262,6 +2263,7 @@
         const fl = parseInt(d.fl) || 0,
             tot = parseInt(d.tf) || 1,
             ratio = fl / Math.max(tot, 1);
+        const isOldBldg = (d.by === 'old' || d.by === 'veryold');
         let fm = 1.0;
         if (fl === 0) {
             fm = d.pt === 'garden' ? 1.05 : 0.93;
@@ -2282,16 +2284,27 @@
             });
         }
         else if (ratio > 0.85) {
-            fm = d.pt === 'penthouse' ? 1.25 : 1.08;
-            f.push({
-                l: 'קומה',
-                v: `${fl}/${tot} ⬆️`,
-                n: d.pt === 'penthouse' ? '+25%' : '+8%',
-                c: 'pos'
-            });
+            if (d.pt === 'penthouse') {
+                fm = 1.25;
+                f.push({
+                    l: 'קומה',
+                    v: `${fl}/${tot} ⬆️`,
+                    n: '+25%',
+                    c: 'pos'
+                });
+            }
+            else {
+                fm = isOldBldg ? 1.03 : 1.08;
+                f.push({
+                    l: 'קומה',
+                    v: `${fl}/${tot} ⬆️`,
+                    n: isOldBldg ? '+3%' : '+8%',
+                    c: 'pos'
+                });
+            }
         }
         else if (fl >= 4) {
-            fm = 1.04 + Math.min(ratio * 0.04, 0.06);
+            fm = isOldBldg ? (1.01 + Math.min(ratio * 0.02, 0.03)) : (1.04 + Math.min(ratio * 0.04, 0.06));
             f.push({
                 l: 'קומה',
                 v: `${fl}/${tot}`,

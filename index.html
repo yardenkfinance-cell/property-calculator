@@ -673,6 +673,9 @@
                                     <option value="kiryat_ata">קריית אתא</option>
                                     <option value="migdal_haemek">מגדל העמק</option>
                                 </optgroup>
+                                <optgroup label="── אזור מנשה / עמק חפר ──">
+                                    <option value="kfar_glikson">כפר גליקסון</option>
+                                </optgroup>
                                 <optgroup label="── פריפריה / צפון ──">
                                     <option value="nof_hagalil">נוף הגליל (נצרת עילית)</option>
                                     <option value="maalot">מעלות-תרשיחא</option>
@@ -783,7 +786,7 @@
                         </div>
                         <div class="hint">גיל הבניין מוריד/מעלה את המחיר בסיסי ב-8–15%</div>
                     </div>
-                    <div class="g2 mb">
+                    <div class="g2 mb" id="floorRow">
                         <div>
                             <label>
                                 קומת הדירה 
@@ -797,7 +800,7 @@
                             <div class="hint">חשוב לניקוד הקומה</div>
                         </div>
                     </div>
-                    <div class="mb">
+                    <div class="mb" id="posRow">
                         <label>מיקום בבניין</label>
                         <div class="pg">
                             <label class="pl">
@@ -866,7 +869,7 @@
                     <div class="mb">
                         <label>תוספות קיימות</label>
                         <div class="pg">
-                            <label class="pl">
+                            <label class="pl" id="elevatorOpt">
                                 <input type="checkbox" name="ex" value="elevator">
                                 <span>🛗 מעלית</span>
                             </label>
@@ -957,8 +960,8 @@
                         </div>
                         <div class="hint">רמת חומרי הגמר (מטבח, ריצוף, אמבטיות) — בנפרד ממצב התחזוקה</div>
                     </div>
-                    <div class="sep"></div>
-                    <div class="mb">
+                    <div class="sep" id="pbSep"></div>
+                    <div class="mb" id="pbRow">
                         <label>סטטוס פינוי-בינוי / התחדשות עירונית</label>
                         <div class="pg">
                             <label class="pl">
@@ -995,7 +998,7 @@
                             </div>
                         </div>
                         <div id="gardenout" class="hint" style="margin-top:7px;font-weight:700;color:#047857"></div>
-                        <div id="nts" style="margin-top:7px;display:none">
+                        <div id="nts" style="margin-top:7px">
                             <label>סוג ישוב</label>
                             <select id="nt">
                                 <option value="moshav">מושב</option>
@@ -1003,6 +1006,7 @@
                                 <option value="regional">מועצה אזורית</option>
                                 <option value="agri_suburb">פרבר חקלאי</option>
                             </select>
+                            <div class="hint">משפיע על שווי הקרקע/המגרש - קיבוץ ומושב מתומחרים אחרת ממועצה אזורית כללית</div>
                         </div>
                     </div>
                 </div>
@@ -1845,6 +1849,15 @@
             }
         },
 
+        kfar_glikson: {
+            lbl: "כפר גליקסון",
+            def: 17500,
+            n: {
+                "כפר גליקסון": 17500,
+                "שכונה אחרת (הקלד)": 17000
+            }
+        },
+
         nof_hagalil: {
             lbl: "נוף הגליל",
             def: 13000,
@@ -2066,6 +2079,41 @@
         })
     }
 
+    function isGround(pt) {
+        return pt === 'cottage' || pt === 'nachla';
+    }
+
+    // Show/hide field groups that only make sense for one property category
+    function updateFieldVisibility() {
+        const pt = $('pt').value;
+        const ground = isGround(pt);
+
+        // Ground-only block (land/built/garden/settlement type)
+        $('nb').style.display = ground ? 'block' : 'none';
+        $('nblbl').textContent = pt === 'nachla' ? '🌾 פרטי נחלה / מגרש' : '🏡 פרטי בית קרקע';
+        $('nts').style.display = 'block'; // relevant for both cottage and nachla now
+        if (ground) updateGroundGarden();
+
+        // Apartment-building-only fields: floor number/total floors, position in building, elevator, urban renewal
+        const bldgDisplay = ground ? 'none' : '';
+        $('floorRow').style.display = bldgDisplay;
+        $('posRow').style.display = bldgDisplay;
+        $('elevatorOpt').style.display = bldgDisplay;
+        $('pbRow').style.display = bldgDisplay;
+        $('pbSep').style.display = bldgDisplay;
+
+        // Reset values that shouldn't count when hidden, so calculation stays clean
+        if (ground) {
+            $('fl').value = '';
+            $('tf').value = '';
+            document.querySelector('input[name="fc"][value="front"]').checked = true;
+            document.querySelector('input[name="ex"][value="elevator"]').checked = false;
+            document.querySelector('input[name="pb"][value="none"]').checked = true;
+        }
+    }
+
+    $('pt').addEventListener('change', updateFieldVisibility);
+
     $('cs').addEventListener('change', function() {
         const k = this.value,
             ns = $('ns');
@@ -2101,9 +2149,6 @@
         $('cdb').style.display = 'block';
         $('cdl').textContent = (this.value === 'new' || this.value === 'good' || this.value === 'brandnew') ? 'מה כולל השיפוץ? (אופציונלי)' : 'מה צריך שיפוץ?';
     }));
-    function isGround(pt) {
-        return pt === 'cottage' || pt === 'nachla';
-    }
     function updateGroundGarden() {
         const land = parseFloat($('nl').value) || 0,
             built = parseFloat($('nbu').value) || 0;
@@ -2122,14 +2167,6 @@
             out.textContent = '';
         }
     }
-    $('pt').addEventListener('change', function() {
-        const g = isGround(this.value);
-        $('nb').style.display = g ? 'block' : 'none';
-        $('nblbl').textContent = this.value === 'nachla' ? '🌾 פרטי נחלה / מגרש' : '🏡 פרטי בית קרקע';
-        $('nts').style.display = this.value === 'nachla' ? 'block' : 'none';
-        if (g)
-            updateGroundGarden();
-    });
     $('nl').addEventListener('input', updateGroundGarden);
     $('nbu').addEventListener('input', updateGroundGarden);
 
@@ -2260,89 +2297,122 @@
             }
         }
 
-        const fl = parseInt(d.fl) || 0,
-            tot = parseInt(d.tf) || 1,
-            ratio = fl / Math.max(tot, 1);
-        const isOldBldg = (d.by === 'old' || d.by === 'veryold');
-        let fm = 1.0;
-        if (fl === 0) {
-            fm = d.pt === 'garden' ? 1.05 : 0.93;
-            f.push({
-                l: 'קומה',
-                v: `קרקע מתוך ${tot}`,
-                n: d.pt === 'garden' ? '+5%' : '-7%',
-                c: d.pt === 'garden' ? 'pos' : 'neg'
-            });
-        }
-        else if (fl === 1) {
-            fm = 0.96;
-            f.push({
-                l: 'קומה',
-                v: `${fl}/${tot}`,
-                n: '-4%',
-                c: 'neg'
-            });
-        }
-        else if (ratio > 0.85) {
-            if (d.pt === 'penthouse') {
-                fm = 1.25;
+        // Building-specific factors (floor, elevator, position, urban renewal) — apartments only
+        if (!isGround(d.pt)) {
+            const fl = parseInt(d.fl) || 0,
+                tot = parseInt(d.tf) || 1,
+                ratio = fl / Math.max(tot, 1);
+            const isOldBldg = (d.by === 'old' || d.by === 'veryold');
+            let fm = 1.0;
+            if (fl === 0) {
+                fm = d.pt === 'garden' ? 1.05 : 0.93;
                 f.push({
                     l: 'קומה',
-                    v: `${fl}/${tot} ⬆️`,
-                    n: '+25%',
+                    v: `קרקע מתוך ${tot}`,
+                    n: d.pt === 'garden' ? '+5%' : '-7%',
+                    c: d.pt === 'garden' ? 'pos' : 'neg'
+                });
+            }
+            else if (fl === 1) {
+                fm = 0.96;
+                f.push({
+                    l: 'קומה',
+                    v: `${fl}/${tot}`,
+                    n: '-4%',
+                    c: 'neg'
+                });
+            }
+            else if (ratio > 0.85) {
+                if (d.pt === 'penthouse') {
+                    fm = 1.25;
+                    f.push({
+                        l: 'קומה',
+                        v: `${fl}/${tot} ⬆️`,
+                        n: '+25%',
+                        c: 'pos'
+                    });
+                }
+                else {
+                    fm = isOldBldg ? 1.03 : 1.08;
+                    f.push({
+                        l: 'קומה',
+                        v: `${fl}/${tot} ⬆️`,
+                        n: isOldBldg ? '+3%' : '+8%',
+                        c: 'pos'
+                    });
+                }
+            }
+            else if (fl >= 4) {
+                fm = isOldBldg ? (1.01 + Math.min(ratio * 0.02, 0.03)) : (1.04 + Math.min(ratio * 0.04, 0.06));
+                f.push({
+                    l: 'קומה',
+                    v: `${fl}/${tot}`,
+                    n: `+${Math.round((fm - 1) * 100)}%`,
                     c: 'pos'
                 });
             }
             else {
-                fm = isOldBldg ? 1.03 : 1.08;
                 f.push({
                     l: 'קומה',
-                    v: `${fl}/${tot} ⬆️`,
-                    n: isOldBldg ? '+3%' : '+8%',
+                    v: `${fl}/${tot}`,
+                    n: 'ניטרלי',
+                    c: 'neu'
+                });
+            }
+            m *= fm;
+
+            const hE = d.ex.includes('elevator');
+            if (fl >= 4 && !hE) {
+                m *= 0.92;
+                f.push({
+                    l: 'מעלית',
+                    v: 'אין (קומה גבוהה)',
+                    n: '-8%',
+                    c: 'neg'
+                });
+            }
+            else if (hE && fl >= 4) {
+                f.push({
+                    l: 'מעלית',
+                    v: 'יש',
+                    n: 'ניטרלי',
+                    c: 'neu'
+                });
+            }
+
+            if (d.fc === 'rear') {
+                m *= 0.97;
+                f.push({
+                    l: 'מיקום',
+                    v: 'עורפית',
+                    n: '-3%',
+                    c: 'neg'
+                });
+            }
+            else if (d.fc === 'corner') {
+                m *= 1.02;
+                f.push({
+                    l: 'מיקום',
+                    v: 'פינתית',
+                    n: '+2%',
                     c: 'pos'
                 });
             }
+
+            const pb = d.pb || 'none';
+            if (pb !== 'none') {
+                m *= PB_M[pb];
+                f.push({
+                    l: 'פינוי-בינוי',
+                    v: PB_L[pb],
+                    n: PB_N[pb],
+                    c: PB_C[pb]
+                });
+            }
         }
-        else if (fl >= 4) {
-            fm = isOldBldg ? (1.01 + Math.min(ratio * 0.02, 0.03)) : (1.04 + Math.min(ratio * 0.04, 0.06));
-            f.push({
-                l: 'קומה',
-                v: `${fl}/${tot}`,
-                n: `+${Math.round((fm - 1) * 100)}%`,
-                c: 'pos'
-            });
-        }
-        else {
-            f.push({
-                l: 'קומה',
-                v: `${fl}/${tot}`,
-                n: 'ניטרלי',
-                c: 'neu'
-            });
-        }
-        m *= fm;
 
         const isNew = (d.by === 'new' || d.by === 'mid');
         const has = k => d.ex.includes(k);
-
-        const hE = has('elevator');
-        if (fl >= 4 && !hE) {
-            m *= 0.92;
-            f.push({
-                l: 'מעלית',
-                v: 'אין (קומה גבוהה)',
-                n: '-8%',
-                c: 'neg'
-            });
-        }
-        else if (hE && fl >= 4) {
-            f.push({
-                l: 'מעלית',
-                v: 'יש',
-                n: 'ניטרלי',
-                c: 'neu'
-            });
-        }
 
         if (has('mamad')) {
             if (isNew) {
@@ -2431,7 +2501,7 @@
                 c: 'pos'
             });
         }
-        if (isNew && !has('balcony')) {
+        if (!isGround(d.pt) && isNew && !has('balcony')) {
             m *= 0.98;
             f.push({
                 l: 'מרפסת',
@@ -2482,25 +2552,6 @@
                     n: om > 1 ? '+1%' : '-1%',
                     c: om > 1 ? 'pos' : 'neg'
                 });
-        }
-
-        if (d.fc === 'rear') {
-            m *= 0.97;
-            f.push({
-                l: 'מיקום',
-                v: 'עורפית',
-                n: '-3%',
-                c: 'neg'
-            });
-        }
-        else if (d.fc === 'corner') {
-            m *= 1.02;
-            f.push({
-                l: 'מיקום',
-                v: 'פינתית',
-                n: '+2%',
-                c: 'pos'
-            });
         }
 
         const vM = {
@@ -2599,18 +2650,9 @@
             });
         }
 
-        const pb = d.pb || 'none';
-        if (pb !== 'none') {
-            m *= PB_M[pb];
-            f.push({
-                l: 'פינוי-בינוי',
-                v: PB_L[pb],
-                n: PB_N[pb],
-                c: PB_C[pb]
-            });
-        }
+        const pb = isGround(d.pt) ? 'none' : (d.pb || 'none');
 
-        const pbFactor = PB_M[pb];
+        const pbFactor = isGround(d.pt) ? 1.0 : PB_M[pb];
         const mNoPb = m / pbFactor;
         if (mNoPb > 1.55) {
             m = 1.55 * pbFactor;
@@ -2630,14 +2672,14 @@
             const garden = Math.max(land - built, 0);
             const builtVal = built * effPrice;
             let landVal;
+            const nt = $('nt').value;
+            const lP = {
+                moshav: 300000,
+                kibbutz: 250000,
+                regional: 180000,
+                agri_suburb: 400000
+            };
             if (d.pt === 'nachla') {
-                const nt = $('nt').value;
-                const lP = {
-                    moshav: 300000,
-                    kibbutz: 250000,
-                    regional: 180000,
-                    agri_suburb: 400000
-                };
                 const dunam = land > 50 ? land / 1000 : land;
                 landVal = dunam * (lP[nt] || 250000);
                 f.push({
@@ -2658,12 +2700,17 @@
                     gardenVal: 0
                 };
             }
-            const gardenVal = garden * effPrice * 0.30;
+            // Cottage on settlement land (moshav/kibbutz/regional/agri_suburb): price the yard/garden
+            // using a blend of the per-sqm neighborhood rate and settlement-type land pricing,
+            // rather than a flat 30% of the apartment-style price alone.
+            const settlementDunamRate = (lP[nt] || 180000) / 1000; // per sqm
+            const blendedGardenRate = (effPrice * 0.30 + settlementDunamRate) / 2;
+            const gardenVal = garden * blendedGardenRate;
             if (garden > 0)
                 f.push({
                     l: 'גינה/חצר',
                     v: `${garden.toLocaleString('he-IL')} מ"ר`,
-                    n: '+30%/מ"ר',
+                    n: 'לפי סוג ישוב',
                     c: 'pos'
                 });
             return {
@@ -2814,7 +2861,8 @@
         };
         const exT = d.ex.length ? d.ex.join(', ') : 'ללא תוספות';
         const pbT = d.pb === 'signed' ? ' <strong>הנכס חתום בהסכם פינוי-בינוי</strong> — תוספת ערך משמעותית (תלוי בהתקדמות הפרויקט בפועל).' : d.pb === 'candidate' ? ' הנכס מועמד לפינוי-בינוי (לא חתום) — השפעה מזערית על השווי עד לחתימה.' : '';
-        $('rn').innerHTML = `<strong>📊 ניתוח:</strong> ב<strong>${nh}</strong>, ${cl} — בסיס שוק <strong>${calc.base.toLocaleString('he-IL')} ₪/מ"ר</strong> לבנייה ${BY_L[d.by]}. ${cT[d.cd]}, ${FN_L[d.fn]}. תוספות: ${exT}. קומה <strong>${d.fl} מתוך ${d.tf}</strong>, ${d.fc === 'front' ? 'חזית' : d.fc === 'rear' ? 'עורפית' : 'פינתית'}.${pbT}`;
+        const floorT = isGround(d.pt) ? '' : ` קומה <strong>${d.fl} מתוך ${d.tf}</strong>, ${d.fc === 'front' ? 'חזית' : d.fc === 'rear' ? 'עורפית' : 'פינתית'}.${pbT}`;
+        $('rn').innerHTML = `<strong>📊 ניתוח:</strong> ב<strong>${nh}</strong>, ${cl} — בסיס שוק <strong>${calc.base.toLocaleString('he-IL')} ₪/מ"ר</strong> לבנייה ${BY_L[d.by]}. ${cT[d.cd]}, ${FN_L[d.fn]}. תוספות: ${exT}.${floorT}`;
 
         ss('r');
         try {
@@ -2840,11 +2888,14 @@
         $('vf').reset();
         $('ns').innerHTML = '<option value="">בחר עיר קודם...</option>';
         $('ns').disabled = true;
-        ['cnb', 'fab', 'cdb', 'nb', 'balb'].forEach(id => $(id).style.display = 'none');
+        ['cnb', 'fab', 'cdb', 'balb'].forEach(id => $(id).style.display = 'none');
         $('gardenout').textContent = '';
         document.querySelectorAll('.err').forEach(el => el.classList.remove('s'));
+        updateFieldVisibility();
         ss('f');
     }
+
+    updateFieldVisibility();
     </script>
     <a href="https://yardenkoubi.com" class="back-home">🏠 חזרה לאתר הראשי</a>
 </body>
